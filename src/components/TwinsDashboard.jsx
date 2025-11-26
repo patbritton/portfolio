@@ -177,6 +177,11 @@ const TwinsDashboard = () => {
   const avgAttendance = data.length > 0 
     ? Math.round(data.reduce((sum, d) => sum + (d.Avg_Attendance || 0), 0) / data.length) 
     : 0;
+
+  const dataSince1960 = allData.filter(d => d.Year >= 1960 && d.Avg_Attendance);
+  const avgAttendance1960 = dataSince1960.length > 0
+    ? Math.round(dataSince1960.reduce((sum, d) => sum + d.Avg_Attendance, 0) / dataSince1960.length)
+    : 0;
   const playoffYears = data.filter(d => d.Playoffs === 'Yes').length;
 
   // --- EXPORT ---
@@ -370,18 +375,21 @@ const TwinsDashboard = () => {
             value={`${playoffYears}/${data.length}`}
             subtitle={`${((playoffYears / data.length) * 100).toFixed(0)}% success rate`}
             icon={Award}
+            onClick={() => openModal('Playoffs')}
           />
           <MetricCard
             title="Avg Win Rate"
             value={`${avgWinPct}%`}
             subtitle="selected period"
             icon={TrendingUp}
+            onClick={() => openModal('Wins')}
           />
           <MetricCard
             title="Avg Attendance"
-            value={avgAttendance.toLocaleString()}
-            subtitle="per game avg"
+            value={avgAttendance1960.toLocaleString()} 
+            subtitle="per game avg (Since 1960)"
             icon={Users}
+            onClick={() => openModal('Avg_Attendance')}
           />
         </div>
 

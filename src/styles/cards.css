@@ -1,28 +1,164 @@
 /* src/styles/cards.css */
 
-/* Typography Extras */
-.hero { padding: 4rem 0; text-align: center; }
-h1 { font-size: 3rem; margin-bottom: 0.75rem; color: #f8fafc; letter-spacing: -0.025em; }
-p { color: #94a3b8; font-size: 1.25rem; line-height: 1.75; }
+/* --- HERO SECTION (Split Layout) --- */
+.hero-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Split screen: Text | Stats */
+  gap: 4rem;
+  align-items: center;
+  padding: 0;
+  max-width: 1100px;
+  margin: 0 auto;
+}
 
-/* Headers */
+/* Left Column: Text */
+.hero-text {
+  text-align: left;
+}
+
+h1 { 
+  font-size: 3.5rem; 
+  margin-bottom: 1.5rem; 
+  font-weight: 800;
+  color: #f8fafc; 
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.highlight {
+  color: #38bdf8; /* Cyan Pop */
+}
+
+.lead { 
+  color: #94a3b8; 
+  font-size: 1.25rem; 
+  line-height: 1.6;
+  margin-bottom: 2.5rem; 
+  max-width: 90%;
+}
+
+/* Hero Buttons */
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn {
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s;
+  font-size: 1rem;
+  display: inline-block;
+}
+.btn:hover { transform: translateY(-2px); }
+
+.btn-primary {
+  background: #38bdf8; 
+  color: #0f172a;      
+  border: 1px solid #38bdf8;
+}
+.btn-primary:hover { background: #7dd3fc; }
+
+.btn-secondary {
+  color: #e2e8f0;
+  border: 1px solid #334155;
+}
+.btn-secondary:hover { border-color: #e2e8f0; background: #1e293b; }
+
+
+/* --- RIGHT COLUMN (The "Code Card") --- */
+.stat-card {
+  background: #1e293b; /* Card Slate */
+  border-radius: 12px;
+  border: 1px solid #334155;
+  box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 0.9rem;
+}
+
+.stat-header {
+  background: #0f172a; /* Darker Header */
+  padding: 12px 16px;
+  border-bottom: 1px solid #334155;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Mac-style Window Dots */
+.dot { width: 10px; height: 10px; border-radius: 50%; }
+.red { background: #ef4444; }
+.yellow { background: #eab308; }
+.green { background: #22c55e; }
+
+.stat-title {
+  margin-left: 12px;
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+.stat-body {
+  padding: 24px;
+  line-height: 1.6;
+}
+
+.stat-row {
+  margin-bottom: 8px;
+  display: flex;
+  gap: 12px;
+}
+
+/* Syntax Highlighting Colors */
+.key { color: #38bdf8; }   /* Cyan */
+.value { color: #e2e8f0; } /* White */
+.string { color: #a78bfa; } /* Purple */
+.array { color: #facc15; }  /* Yellow */
+.comment { color: #64748b; font-style: italic; margin-top: 12px; display: block;}
+
+.border-top {
+  border-top: 1px solid #334155;
+  padding-top: 12px;
+  margin-top: 12px;
+}
+
+/* Tags inside code card */
+.skill-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.code-tag {
+  background: #0f172a;
+  color: #38bdf8;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  border: 1px solid #334155;
+}
+
+/* --- SECTION HEADERS --- */
 h2 { 
   color: #e2e8f0; 
-  margin-top: 6rem;       
+  margin-top: 4rem;       
   margin-bottom: 2rem;    
   border-bottom: 1px solid #1e293b; 
   padding-bottom: 1rem; 
   font-size: 1.8rem; 
 }
 
-/* --- GRID SYSTEM (The Spacing Fix) --- */
+/* --- GRID SYSTEM --- */
 .project-grid, .blog-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   
-  /* THE FIX: Tight horizontal, Wide vertical */
-  column-gap: 2rem;  /* Normal spacing side-by-side */
-  row-gap: 4rem;     /* Big spacing when stacked (Mobile) */
+  /* SPACING CONFIG */
+  column-gap: 2rem;  /* Tight horizontal */
+  row-gap: 4rem;     /* Wide vertical */
   
   margin-bottom: 6rem;    
 }
@@ -42,7 +178,7 @@ h2 {
   height: 100%;
 }
 
-/* --- THEMES --- */
+/* Hover Themes */
 .project-card:hover {
   transform: translateY(-5px);
   border-color: #38bdf8;
@@ -51,11 +187,11 @@ h2 {
 
 .blog-card:hover {
   transform: translateY(-5px);
-  border-color: #2dd4bf;
+  border-color: #2dd4bf; /* Teal */
   box-shadow: 0 10px 30px -10px rgba(45, 212, 191, 0.15);
 }
 
-/* Content */
+/* Card Typography */
 h3 { margin: 0; font-size: 1.5rem; color: #f8fafc; font-weight: 700; }
 
 .content p, .blog-card p { 
@@ -66,7 +202,7 @@ h3 { margin: 0; font-size: 1.5rem; color: #f8fafc; font-weight: 700; }
   flex-grow: 1;
 }
 
-/* Meta */
+/* Meta Data */
 .post-date { 
   font-size: 0.75rem; 
   color: #2dd4bf; 
@@ -108,10 +244,24 @@ h3 { margin: 0; font-size: 1.5rem; color: #f8fafc; font-weight: 700; }
   border: 1px solid #475569;
 }
 
-/* Mobile Adjustments */
-@media (max-width: 768px) {
+/* --- MOBILE RESPONSIVE --- */
+@media (max-width: 900px) {
+  .hero-wrapper {
+    grid-template-columns: 1fr; /* Stack vertically */
+    text-align: center;
+    padding-top: 2rem;
+    gap: 3rem;
+  }
+  
+  .hero-text { text-align: center; }
+  .lead { margin: 0 auto 2rem; }
+  .hero-actions { justify-content: center; }
+  
+  /* Ensure card fits on mobile screen */
+  .stat-card { margin: 0 auto; max-width: 100%; text-align: left; }
+  
+  /* Keep vertical spacing large on mobile */
   .project-grid, .blog-grid {
-    /* Ensure vertical gap stays big on mobile */
     row-gap: 4rem; 
   }
 }

@@ -10,9 +10,56 @@ const recentPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pu
 
 <MainLayout title="Home">
   
-  <div class="hero">
-    <h1>Data Product Portfolio</h1>
-    <p>Building interactive analytics tools with React, Python, and Modern Web Tech.</p>
+<div class="hero-wrapper">
+    
+    <div class="hero-text">
+      <h1>Data Intelligence, <br/> <span class="highlight">Engineered.</span></h1>
+      <p class="lead">
+        I don't just run queries. I build interactive data applications that turn complex datasets into actionable business insights.
+      </p>
+      
+      <div class="hero-actions">
+        <a href="/projects/twins" class="btn btn-primary">View Latest Dashboard</a>
+        <a href="https://github.com/patbritton" target="_blank" class="btn btn-secondary">
+          Review Code
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="stat-header">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+          <span class="stat-title">patrick_britton.py</span>
+        </div>
+        <div class="stat-body">
+          <div class="stat-row">
+            <span class="key">Role:</span>
+            <span class="value string">"Business Data Analyst"</span>
+          </div>
+          <div class="stat-row">
+            <span class="key">Location:</span>
+            <span class="value string">"Minneapolis, MN"</span>
+          </div>
+          <div class="stat-row">
+            <span class="key">Focus:</span>
+            <span class="value array">["Visualization", "Engineering"]</span>
+          </div>
+          <div class="stat-row border-top">
+            <span class="comment"># Core Competencies</span>
+          </div>
+          <div class="skill-tags">
+            <span class="code-tag">Python</span>
+            <span class="code-tag">SQL</span>
+            <span class="code-tag">React</span>
+            <span class="code-tag">Tableau</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <h2>Live Dashboards</h2>
