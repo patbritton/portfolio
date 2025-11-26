@@ -26,6 +26,7 @@ jobs:
             
             # 3. Install Node Dependencies
             npm install
+            npm run build
             
             # 4. Build the Site (Creates the 'dist' folder)
-            npm run build
+            chmod -R g+rwX dist
