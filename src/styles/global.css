@@ -35,9 +35,15 @@ nav {
 .nav-links a { 
   color: #94a3b8; 
   text-decoration: none; 
-  margin-left: 24px; 
+  margin-left: 16px; 
   font-weight: 500;
   transition: color 0.2s ease; 
+}
+
+.nav-links {
+  display: flex;
+  align-items: center; /* Ensures search icon aligns with text */
+  gap: 8px;            /* Space between items */
 }
 
 .nav-links a:hover { 

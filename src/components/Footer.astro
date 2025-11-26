@@ -1,0 +1,49 @@
+---
+import { Github, Linkedin, Mail, MapPin } from 'lucide-react';
+import '../styles/footer.css';
+const today = new Date();
+---
+
+<footer>
+  <div class="footer-container">
+    
+    <div class="brand-col">
+      <a href="/" class="logo">Patrick.mp.ls</a>
+      <p class="tagline">
+        Turning complex datasets into interactive stories using modern web engineering.
+      </p>
+      <div class="location">
+        <MapPin size={16} /> Minneapolis, MN
+      </div>
+    </div>
+
+    <div class="links-col">
+      <h4>Explore</h4>
+      <a href="/">Home</a>
+      <a href="/about">About Me</a>
+      <a href="/projects">Dashboards</a>
+      <a href="/blog">Blog</a>
+    </div>
+
+    <div class="social-col">
+      <h4>Connect</h4>
+      <div class="social-icons">
+        <a href="https://github.com/patbritton" target="_blank" aria-label="GitHub">
+          <Github size={20} />
+        </a>
+        <a href="https://linkedin.com/in/YOUR_LINKEDIN_USER" target="_blank" aria-label="LinkedIn">
+          <Linkedin size={20} />
+        </a>
+        <a href="mailto:patrick@mp.ls" aria-label="Email">
+          <Mail size={20} />
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="bottom-bar">
+    <p>&copy; {today.getFullYear()} Patrick Britton. All rights reserved.</p>
+    <p class="stack-info">Built with <a href="https://astro.build/" target="_blank">Astro</a>, <a href="https://react.dev/" target="_blank">React</a> & <a href="https://recharts.github.io/" target="_blank">Recharts</a>.</p>
+  </div>
+</footer>

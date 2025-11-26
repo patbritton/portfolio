@@ -1,0 +1,12 @@
+---
+import { getCollection } from 'astro:content';
+
+// 1. Get all posts
+const posts = await getCollection('blog');
+
+// 2. Find the newest one
+const latestPost = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())[0];
+
+// 3. Redirect to it
+return Astro.redirect(`/blog/${latestPost.slug}`);
+---

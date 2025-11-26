@@ -1,0 +1,51 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import { getCollection } from 'astro:content';
+import '../../styles/cards.css'; // Re-use your existing card styles
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog');
+  
+  // 1. Get all unique tags
+  const uniqueTags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
+
+  // 2. Generate a page for each tag
+  return uniqueTags.map((tag) => {
+    const filteredPosts = allPosts.filter((post) => post.data.tags.includes(tag));
+    return {
+      params: { tag },
+      props: { posts: filteredPosts },
+    };
+  });
+}
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+---
+
+<MainLayout title={`#${tag}`}>
+  <div class="tag-header">
+    <h1>#{tag}</h1>
+    <p>Showing {posts.length} post{posts.length !== 1 ? 's' : ''} tagged with <strong>{tag}</strong></p>
+    <a href="/blog" class="back-link">← Back to All Posts</a>
+  </div>
+
+  <div class="blog-grid">
+    {posts.map((post) => (
+      <a href={`/blog/${post.slug}`} class="blog-card">
+        <span class="post-date">{post.data.pubDate.toISOString().slice(0,10)}</span>
+        <h3>{post.data.title}</h3>
+        <p>{post.data.description}</p>
+        <div class="read-more">Read Article →</div>
+      </a>
+    ))}
+  </div>
+</MainLayout>
+
+<style>
+  .tag-header { text-align: center; margin-bottom: 3rem; }
+  h1 { font-size: 3rem; color: #f8fafc; margin-bottom: 0.5rem; text-transform: capitalize; }
+  p { color: #94a3b8; font-size: 1.2rem; }
+  .back-link { display: inline-block; margin-top: 1rem; color: #2dd4bf; text-decoration: none; }
+  .back-link:hover { text-decoration: underline; }
+</style>

@@ -1,0 +1,23 @@
+---
+import SiteSearch from './SiteSearch.jsx';
+import { getCollection } from 'astro:content';
+
+// Fetch data for the search bar right here in the component
+const searchPosts = await getCollection('blog');
+---
+
+<nav>
+  <a href="/" class="logo">Patrick.mp.ls</a>
+  
+  <div class="nav-links">
+    
+    
+    <a href="/">Home</a>
+    <a href="/projects">Dashboards</a>
+    <a href="/blog">Blog</a>
+    <a href="https://github.com/patbritton" target="_blank">GitHub</a>
+    <a href="/about">About</a>
+    <SiteSearch client:load posts={searchPosts} />
+
+</div>
+</nav>

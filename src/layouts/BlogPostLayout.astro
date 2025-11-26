@@ -1,77 +1,67 @@
 ---
 import MainLayout from './MainLayout.astro';
-import '../styles/cards.css';
+import { getCollection } from 'astro:content';
+import SearchWidget from '../components/SearchWidget.jsx';
+
+// Import the new CSS file
+import '../styles/blog-layout.css';
+
 const { frontmatter } = Astro.props;
 
-// Formatting the date
+// Fetch posts for sidebar navigation
+const allPosts = await getCollection('blog');
+const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
 const dateStr = new Date(frontmatter.pubDate).toLocaleDateString('en-US', {
   year: 'numeric', month: 'long', day: 'numeric'
 });
 ---
 
 <MainLayout title={frontmatter.title}>
-  <div class="blog-container">
+  
+  <div class="docs-grid">
     
-    <header>
-      <span class="date">{dateStr}</span>
-      <h1>{frontmatter.title}</h1>
-      <p class="desc">{frontmatter.description}</p>
-      <div class="tags">
-        {frontmatter.tags.map(tag => <span class="tag">#{tag}</span>)}
+    <article class="content-area">
+      <header class="post-header">
+        <span class="post-date">{dateStr}</span>
+        <h1>{frontmatter.title}</h1>
+        
+        <div class="tags">
+          {frontmatter.tags && frontmatter.tags.map(tag => (
+            <a href={`/tags/${tag}`} class="tag">#{tag}</a>
+          ))}
+        </div>
+      </header>
+
+      <hr class="divider" />
+
+      <div class="prose">
+        <slot />
       </div>
-    </header>
-
-    <hr />
-
-    <article class="prose">
-      <slot />
     </article>
 
-    <hr />
+    <aside class="sidebar">
+      <div class="sidebar-inner">
+        
+        <SearchWidget client:load posts={allPosts} />
 
-    <div class="interaction-area">
-      <h3>Share & Discuss</h3>
-      
-      <button id="shareBtn" class="action-btn">
-        📤 Share this Post
-      </button>
-
-<script src="https://giscus.app/client.js"
-        data-repo="patbritton/portfolio"
-        data-repo-id="R_kgDOQdEBRA"
-        data-category="[ENTER CATEGORY NAME HERE]"
-        data-category-id="[ENTER CATEGORY ID HERE]"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="bottom"
-        data-theme="preferred_color_scheme"
-        data-lang="en"
-        crossorigin="anonymous"
-        async>
-</script>
-    </div>
+        <h3>Recent Updates</h3>
+        <ul class="post-list">
+          {sortedPosts.map(post => (
+            <li>
+              <a 
+                href={`/blog/${post.slug}`} 
+                class={frontmatter.title === post.data.title ? 'active' : ''}
+              >
+                {post.data.title}
+                <span class="date-small">{post.data.pubDate.toISOString().slice(0,10)}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </aside>
 
   </div>
-</MainLayout>
 
-<script>
-  // Simple Share Logic
-  document.getElementById('shareBtn')?.addEventListener('click', async () => {
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: document.title,
-          url: window.location.href
-        });
-      } catch (err) {
-        console.log('Share canceled');
-      }
-    } else {
-      // Fallback for desktop
-      navigator.clipboard.writeText(window.location.href);
-      alert('Link copied to clipboard!');
-    }
-  });
-</script>
+</MainLayout>

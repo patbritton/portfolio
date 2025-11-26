@@ -1,0 +1,108 @@
+/* src/styles/about.css */
+
+/* --- Profile Header --- */
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  margin-bottom: 4rem;
+}
+
+.profile-text { flex: 1; }
+
+h1 { font-size: 3.5rem; margin-bottom: 0.5rem; color: #f8fafc; letter-spacing: -1px; }
+.subtitle { font-size: 1.5rem; color: #94a3b8; font-weight: 400; margin-bottom: 1.5rem; }
+.highlight { color: #38bdf8; font-weight: 600; } /* Cyan Highlight */
+
+.bio { font-size: 1.1rem; line-height: 1.7; color: #cbd5e1; margin-bottom: 2rem; max-width: 600px; }
+
+/* --- Buttons --- */
+.social-links { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+
+.btn-outline {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 20px; 
+  border: 1px solid #334155; /* Dark Border */
+  background: #1e293b;       /* Dark Card BG */
+  border-radius: 8px;
+  text-decoration: none; 
+  color: #e2e8f0; 
+  font-weight: 600;
+  transition: all 0.2s;
+}
+.btn-outline:hover { 
+  border-color: #38bdf8; 
+  color: #38bdf8; 
+  transform: translateY(-2px);
+}
+
+.location { display: flex; align-items: center; gap: 6px; color: #64748b; margin-left: 10px; }
+
+/* --- Profile Image --- */
+.profile-image img {
+  width: 280px; height: 280px; border-radius: 20px;
+  object-fit: cover; 
+  border: 2px solid #334155;
+  box-shadow: 20px 20px 0px #1e293b; /* Dark Shadow Block */
+}
+
+hr { border: 0; border-top: 1px solid #1e293b; margin: 4rem 0; }
+
+/* --- Skills Cards --- */
+h3 { font-size: 2rem; color: #f8fafc; margin-bottom: 2rem; }
+
+.skills-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;
+}
+
+.skill-card {
+  background: #1e293b;       /* Dark Card */
+  padding: 2rem; 
+  border-radius: 12px; 
+  border: 1px solid #334155; /* Subtle Border */
+  transition: transform 0.2s;
+}
+
+.skill-card:hover {
+  transform: translateY(-5px);
+  border-color: #38bdf8;
+}
+
+.skill-header { display: flex; align-items: center; gap: 12px; margin-bottom: 1rem; }
+.skill-header h4 { margin: 0; font-size: 1.2rem; color: #f1f5f9; }
+
+ul { list-style: none; padding: 0; margin: 0; }
+li { margin-bottom: 0.5rem; color: #cbd5e1; display: flex; align-items: center; }
+li::before { content: "•"; color: #38bdf8; font-weight: bold; display: inline-block; width: 1em; margin-left: -1em; }
+
+/* --- Timeline --- */
+.timeline-item { display: flex; gap: 2rem; margin-bottom: 2rem; }
+.year { 
+  font-weight: bold; color: #38bdf8; font-size: 1.2rem; min-width: 60px; 
+  position: relative;
+}
+.content h4 { margin: 0 0 0.25rem 0; font-size: 1.2rem; color: #f1f5f9; }
+.org { display: block; font-style: italic; color: #94a3b8; margin-bottom: 0.5rem; font-size: 0.95rem; }
+.content p { margin: 0; color: #cbd5e1; line-height: 1.6; }
+
+/* Honors Tag */
+.honor-tag {
+  display: inline-block;
+  background: rgba(252, 211, 77, 0.1); /* Transparent Gold */
+  color: #fcd34d;                      /* Bright Gold Text */
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 4px 10px;
+  border-radius: 4px;
+  margin-right: 8px;
+  margin-top: 12px;
+  border: 1px solid rgba(252, 211, 77, 0.3);
+}
+
+/* Mobile Response */
+@media (max-width: 768px) {
+  .profile-header { flex-direction: column-reverse; text-align: center; gap: 2rem; }
+  .social-links { justify-content: center; }
+  .profile-image img { width: 200px; height: 200px; }
+  h1 { font-size: 2.5rem; }
+}

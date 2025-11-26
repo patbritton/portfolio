@@ -1,0 +1,93 @@
+/* src/styles/blog-layout.css */
+
+/* Layout Grid */
+.docs-grid {
+  display: grid;
+  grid-template-columns: 1fr 300px; 
+  gap: 4rem;
+  align-items: start;
+}
+
+/* Sidebar */
+.sidebar {
+  position: sticky;
+  top: 100px;
+  border-left: 1px solid #1e293b;
+  padding-left: 2rem;
+  height: calc(100vh - 150px);
+  overflow-y: auto;
+}
+
+.sidebar h3 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  color: #64748b;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+/* Sidebar Links */
+.post-list { list-style: none; padding: 0; margin: 0; }
+.post-list li { margin-bottom: 0.5rem; }
+
+.post-list a {
+  display: block;
+  padding: 0.75rem;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #94a3b8;
+  transition: all 0.2s;
+}
+
+.post-list a:hover { background: #1e293b; color: #f8fafc; }
+
+.post-list a.active {
+  background: #1e293b;
+  color: #2dd4bf; /* Teal active */
+  border: 1px solid #334155;
+  font-weight: 600;
+}
+
+.date-small { display: block; font-size: 0.75rem; color: #475569; margin-top: 4px; }
+
+/* Content Header */
+.post-header h1 { font-size: 2.5rem; color: #f8fafc; margin: 0.5rem 0 1rem 0; line-height: 1.2; }
+.post-date { color: #2dd4bf; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; }
+.divider { border: 0; border-top: 1px solid #1e293b; margin: 2rem 0; }
+
+/* Tags */
+.tags { display: flex; gap: 10px; margin-top: 1rem; }
+.tag {
+  background: #1e293b;
+  color: #2dd4bf;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  text-decoration: none;
+  border: 1px solid #334155;
+  transition: all 0.2s;
+}
+.tag:hover { border-color: #2dd4bf; color: #fff; }
+
+/* Prose (Markdown Content) */
+.prose { color: #cbd5e1; line-height: 1.8; font-size: 1.1rem; max-width: 75ch; }
+.prose h2 { color: #e2e8f0; margin-top: 3rem; font-size: 1.8rem; }
+.prose h3 { color: #e2e8f0; margin-top: 2rem; font-size: 1.4rem; }
+.prose a { color: #2dd4bf; text-decoration: none; border-bottom: 1px solid transparent; }
+.prose a:hover { border-bottom-color: #2dd4bf; }
+.prose ul { padding-left: 1.5rem; margin-bottom: 1.5rem; }
+.prose li { margin-bottom: 0.5rem; }
+.prose img { border-radius: 8px; border: 1px solid #334155; max-width: 100%; }
+
+/* Mobile */
+@media (max-width: 900px) {
+  .docs-grid { grid-template-columns: 1fr; }
+  .sidebar { 
+    position: relative; top: 0; height: auto; 
+    border-left: none; border-top: 1px solid #1e293b;
+    padding-left: 0; padding-top: 2rem; margin-top: 4rem;
+    order: 2;
+  }
+  .content-area { order: 1; }
+}
