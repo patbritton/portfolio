@@ -86,8 +86,8 @@ cd portfolio
 ```Bash
 
 npm install
-Run the Dev Server:
 ```
+## Run the Dev Server:
 
 ```Bash
 
