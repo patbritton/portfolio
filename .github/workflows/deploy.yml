@@ -1,0 +1,31 @@
+name: Deploy Astro to VPS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            # 1. Go to the folder
+            cd /var/www/patrick.mp.ls/html
+            
+            # 2. Reset it to match GitHub exactly (Force Pull)
+            git fetch --all
+            git reset --hard origin/main
+            
+            # 3. Install Node Dependencies
+            npm install
+            
+            # 4. Build the Site (Creates the 'dist' folder)
+            npm run build
