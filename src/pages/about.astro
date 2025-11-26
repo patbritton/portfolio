@@ -58,22 +58,37 @@ const skills = [
     </div>
   </section>
 
-  <section class="timeline-section">
-    <h3>Journey</h3>
+<section class="timeline-section">
+    <h3>Education & History</h3>
+    
+    <div class="timeline-item">
+      <span class="year">Now</span>
+      <div class="content">
+        <h4>AAS, Business Data Analyst</h4>
+        <span class="org">Anoka Technical College</span>
+        <p>
+          Focusing on data visualization, SQL, and business intelligence architectures.
+          <br/>
+          <span class="honor-tag">★ Phi Theta Kappa</span>
+          <span class="honor-tag">★ Honors</span>
+        </p>
+      </div>
+    </div>
+
     <div class="timeline-item">
       <span class="year">2025</span>
       <div class="content">
-        <h4>Building Data Products</h4>
-        <p>Deployed <strong>patrick.mp.ls</strong> and the Twins Analytics Suite using React, Astro, and VPS infrastructure.</p>
+        <h4>Certificate in IT Support</h4>
+        <span class="org">Anoka Technical College</span>
+        <p>
+          Technical systems administration and infrastructure support.
+          <br/>
+          <span class="honor-tag">★ Phi Theta Kappa</span>
+          <span class="honor-tag">★ Honors</span>
+        </p>
       </div>
     </div>
-    <div class="timeline-item">
-      <span class="year">2024</span>
-      <div class="content">
-        <h4>Data Visualization Focus</h4>
-        <p>Deep dive into Python analytics and interactive dashboarding techniques.</p>
-      </div>
-    </div>
+
   </section>
 
 </MainLayout>
@@ -141,7 +156,27 @@ const skills = [
   }
   .content h4 { margin: 0 0 0.5rem 0; font-size: 1.2rem; }
   .content p { margin: 0; color: #64748b; }
+/* Add inside <style> */
+  
+  .org {
+    display: block;
+    font-style: italic;
+    color: #64748b;
+    margin-bottom: 0.5rem;
+  }
 
+  .honor-tag {
+    display: inline-block;
+    background: #fffbeb; /* Light Gold background */
+    color: #b45309;      /* Dark Gold text */
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-right: 8px;
+    margin-top: 8px;
+    border: 1px solid #fcd34d;
+  }
   /* Mobile Response */
   @media (max-width: 768px) {
     .profile-header { flex-direction: column-reverse; text-align: center; gap: 2rem; }
