@@ -1,12 +1,18 @@
 ---
 import { getCollection } from 'astro:content';
+import BlogPostLayout from '../../layouts/BlogPostLayout.astro';
 
 // 1. Get all posts
-const posts = await getCollection('blog');
+const allPosts = await getCollection('blog');
 
-// 2. Find the newest one
-const latestPost = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())[0];
+// 2. Sort by date (Newest first) and grab the first one
+const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const latestPost = sortedPosts[0];
 
-// 3. Redirect to it
-return Astro.redirect(`/blog/${latestPost.slug}`);
+// 3. Render the content of the latest post
+const { Content } = await latestPost.render();
 ---
+
+<BlogPostLayout frontmatter={latestPost.data}>
+  <Content />
+</BlogPostLayout>
