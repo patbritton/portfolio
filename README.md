@@ -79,8 +79,9 @@ Clone the repo:
 
 git clone [https://github.com/patbritton/portfolio.git](https://github.com/patbritton/portfolio.git)
 cd portfolio
-Install dependencies:
 ```
+## Install dependencies:
+
 
 ```Bash
 
@@ -91,8 +92,9 @@ Run the Dev Server:
 ```Bash
 
 npm run dev
-Visit http://localhost:4321 to see the app.
 ```
+
+## Visit http://localhost:4321 to see the app.
 
 ## 🔄 Deployment Pipeline
 This project uses a CI/CD pipeline defined in .github/workflows/deploy.yml.
