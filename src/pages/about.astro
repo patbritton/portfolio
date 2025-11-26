@@ -1,0 +1,152 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import { MapPin, Mail, Github, Linkedin, Terminal, Database, Layout } from 'lucide-react';
+
+const skills = [
+  { name: "Data Analysis", icon: Database, items: ["Python (Pandas/NumPy)", "SQL", "Excel", "Tableau"] },
+  { name: "Web Engineering", icon: Layout, items: ["React", "Astro", "HTML/CSS", "Tailwind"] },
+  { name: "DevOps & Tools", icon: Terminal, items: ["Git/GitHub", "Linux (Ubuntu)", "Nginx", "Cloudflare"] },
+];
+---
+
+<MainLayout title="About Me">
+  
+  <div class="profile-header">
+    <div class="profile-text">
+      <h1>Hi, I'm Patrick.</h1>
+      <h2 class="subtitle">Data Analyst & Full Stack Engineer based in <span class="highlight">Minneapolis</span>.</h2>
+      <p class="bio">
+        I bridge the gap between raw data and interactive user experiences. 
+        While most analysts stop at a static report, I build full-stack applications 
+        that let users explore the data themselves.
+      </p>
+      
+      <div class="social-links">
+        <a href="https://github.com/patbritton" target="_blank" class="btn-outline">
+          <Github size={18} /> GitHub
+        </a>
+        <a href="mailto:your-email@example.com" class="btn-outline">
+          <Mail size={18} /> Contact
+        </a>
+        <span class="location">
+          <MapPin size={18} /> Minneapolis, MN
+        </span>
+      </div>
+    </div>
+    
+<div class="profile-image">
+      <img src="https://github.com/patbritton.png" alt="Patrick Britton" />
+    </div>
+  </div>
+
+  <hr />
+
+  <section class="skills-section">
+    <h3>Technical Stack</h3>
+    <div class="skills-grid">
+      {skills.map(category => (
+        <div class="skill-card">
+          <div class="skill-header">
+            <category.icon size={24} color="#0f172a" />
+            <h4>{category.name}</h4>
+          </div>
+          <ul>
+            {category.items.map(item => <li>{item}</li>)}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="timeline-section">
+    <h3>Journey</h3>
+    <div class="timeline-item">
+      <span class="year">2025</span>
+      <div class="content">
+        <h4>Building Data Products</h4>
+        <p>Deployed <strong>patrick.mp.ls</strong> and the Twins Analytics Suite using React, Astro, and VPS infrastructure.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <span class="year">2024</span>
+      <div class="content">
+        <h4>Data Visualization Focus</h4>
+        <p>Deep dive into Python analytics and interactive dashboarding techniques.</p>
+      </div>
+    </div>
+  </section>
+
+</MainLayout>
+
+<style>
+  /* Profile Header */
+  .profile-header {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    margin-bottom: 4rem;
+  }
+  
+  .profile-text { flex: 1; }
+  
+  h1 { font-size: 3.5rem; margin-bottom: 0.5rem; color: #0f172a; letter-spacing: -1px; }
+  .subtitle { font-size: 1.5rem; color: #64748b; font-weight: 400; margin-bottom: 1.5rem; }
+  .highlight { color: #002B5C; font-weight: 600; }
+  
+  .bio { font-size: 1.1rem; line-height: 1.7; color: #334155; margin-bottom: 2rem; max-width: 600px; }
+
+  .social-links { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  
+  .btn-outline {
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 20px; border: 2px solid #e2e8f0; border-radius: 8px;
+    text-decoration: none; color: #0f172a; font-weight: 600;
+    transition: all 0.2s;
+  }
+  .btn-outline:hover { border-color: #0f172a; background: #0f172a; color: white; }
+  
+  .location { display: flex; align-items: center; gap: 6px; color: #64748b; margin-left: 10px; }
+
+  /* Image */
+  .profile-image img {
+    width: 280px; height: 280px; border-radius: 20px;
+    object-fit: cover; box-shadow: 20px 20px 0px #e2e8f0;
+  }
+
+  hr { border: 0; border-top: 1px solid #e2e8f0; margin: 4rem 0; }
+
+  /* Skills */
+  h3 { font-size: 2rem; color: #0f172a; margin-bottom: 2rem; }
+  
+  .skills-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;
+  }
+  
+  .skill-card {
+    background: white; padding: 2rem; border-radius: 12px; border: 1px solid #e2e8f0;
+  }
+  
+  .skill-header { display: flex; align-items: center; gap: 12px; margin-bottom: 1rem; }
+  .skill-header h4 { margin: 0; font-size: 1.2rem; }
+  
+  ul { list-style: none; padding: 0; margin: 0; }
+  li { margin-bottom: 0.5rem; color: #475569; display: flex; align-items: center; }
+  li::before { content: "•"; color: #94a3b8; font-weight: bold; display: inline-block; width: 1em; margin-left: -1em; }
+
+  /* Timeline */
+  .timeline-item { display: flex; gap: 2rem; margin-bottom: 2rem; }
+  .year { 
+    font-weight: bold; color: #0f172a; font-size: 1.2rem; min-width: 60px; 
+    position: relative;
+  }
+  .content h4 { margin: 0 0 0.5rem 0; font-size: 1.2rem; }
+  .content p { margin: 0; color: #64748b; }
+
+  /* Mobile Response */
+  @media (max-width: 768px) {
+    .profile-header { flex-direction: column-reverse; text-align: center; gap: 2rem; }
+    .social-links { justify-content: center; }
+    .profile-image img { width: 200px; height: 200px; }
+    h1 { font-size: 2.5rem; }
+  }
+</style>
