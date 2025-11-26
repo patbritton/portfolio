@@ -1,0 +1,14 @@
+---
+// This imports the layout we just made
+import MainLayout from '../../layouts/MainLayout.astro';
+// This imports your React Dashboard
+import TwinsDashboard from '../../components/TwinsDashboard.jsx';
+---
+
+<MainLayout title="Twins Analytics">
+  <div style="margin-bottom: 20px;">
+    <a href="/" style="color: #666; text-decoration: none;">← Back to Projects</a>
+  </div>
+
+  <TwinsDashboard client:load />
+</MainLayout>

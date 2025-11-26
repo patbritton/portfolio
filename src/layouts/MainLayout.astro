@@ -1,0 +1,46 @@
+---
+// src/layouts/MainLayout.astro
+const { title } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title} | Patrick's Data Lab</title>
+    
+    <style>
+      body { margin: 0; font-family: sans-serif; background: #f8fafc; }
+      
+      /* The Header */
+      nav {
+        background: #0f172a;
+        color: white;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .logo { font-weight: bold; font-size: 1.2rem; text-decoration: none; color: white; }
+      .nav-links a { color: #94a3b8; text-decoration: none; margin-left: 20px; transition: color 0.2s; }
+      .nav-links a:hover { color: white; }
+
+      /* The Container for content */
+      main { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="/" class="logo">Patrick.mp.ls</a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="https://github.com/patbritton" target="_blank">GitHub</a>
+      </div>
+    </nav>
+
+    <main>
+      <slot />
+    </main>
+  </body>
+</html>

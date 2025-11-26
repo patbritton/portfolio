@@ -1,16 +1,121 @@
 ---
-
+import MainLayout from '../layouts/MainLayout.astro';
+import { Trophy, TrendingUp } from 'lucide-react'; // Using icons for flair
+import { getCollection } from 'astro:content';
+const allPosts = await getCollection('blog');
+// Sort by date (newest first) and take top 3
+const recentPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()).slice(0, 3);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<MainLayout title="Home">
+  
+  <div class="hero">
+    <h1>Data Product Portfolio</h1>
+    <p>Building interactive analytics tools with React, Python, and Modern Web Tech.</p>
+  </div>
+
+  <h2>Live Dashboards</h2>
+  
+  <div class="project-grid">
+    
+    <a href="/projects/twins" class="project-card">
+      <div class="icon-box" style="background: #002B5C; color: white;">
+        <Trophy size={32} />
+      </div>
+      <div class="content">
+        <h3>Twins Analytics Suite</h3>
+        <p>120+ years of historical data visualization including payroll trends, win/loss records, and attendance analysis.</p>
+        <span class="tag">React</span> <span class="tag">Recharts</span>
+      </div>
+    </a>
+
+    <div class="project-card coming-soon">
+      <div class="icon-box" style="background: #ddd; color: #666;">
+        <TrendingUp size={32} />
+      </div>
+      <div class="content">
+        <h3>Sales Forecasting</h3>
+        <p>Coming soon: A predictive model using Python and Prophet.</p>
+        <span class="tag">Python</span>
+      </div>
+    </div>
+
+  </div>
+<h2 style="margin-top: 4rem;">Latest Updates</h2>
+<div class="blog-grid">
+  {recentPosts.map(post => (
+    <a href={`/blog/${post.slug}`} class="blog-card">
+      <span class="post-date">{post.data.pubDate.toISOString().slice(0,10)}</span>
+      <h3>{post.data.title}</h3>
+      <p>{post.data.description}</p>
+    </a>
+  ))}
+</div>
+
+<style>
+  /* Add these simple styles */
+  .blog-grid { display: grid; gap: 1.5rem; }
+  .blog-card { 
+    background: white; padding: 1.5rem; border-radius: 8px; border: 1px solid #e2e8f0; 
+    text-decoration: none; color: inherit; transition: border-color 0.2s;
+  }
+  .blog-card:hover { border-color: #0f172a; }
+  .post-date { font-size: 0.85rem; color: #64748b; }
+  .blog-card h3 { margin: 0.5rem 0; font-size: 1.25rem; color: #0f172a; }
+  .blog-card p { color: #475569; margin: 0; }
+</style>
+</MainLayout>
+
+<style>
+  .hero { padding: 4rem 0; text-align: center; }
+  h1 { font-size: 3rem; margin-bottom: 0.5rem; color: #0f172a; }
+  p { color: #64748b; font-size: 1.2rem; }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .project-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid #e2e8f0;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    border-color: #cbd5e1;
+  }
+
+  .icon-box {
+    padding: 12px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  h3 { margin: 0; font-size: 1.5rem; color: #0f172a; }
+  .content p { font-size: 1rem; margin: 0.5rem 0 1rem 0; }
+
+  .tag {
+    background: #f1f5f9;
+    color: #475569;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-right: 8px;
+  }
+</style>
