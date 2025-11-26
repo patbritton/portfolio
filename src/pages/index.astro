@@ -1,55 +1,75 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
-import '../styles/cards.css'; // <-- Imports the cards/grids
-import { Trophy, TrendingUp } from 'lucide-react'; // Using icons for flair
 import { getCollection } from 'astro:content';
+import SearchWidget from '../components/SearchWidget.jsx';
+import '../styles/blog-layout.css'; // Re-use the sidebar CSS
+import '../styles/cards.css';       // Re-use card styling for the list
+
+// Fetch posts
 const allPosts = await getCollection('blog');
-// Sort by date (newest first) and take top 3
-const recentPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()).slice(0, 3);
+const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
-<MainLayout title="Home">
+<MainLayout title="Blog">
   
-  <div class="hero">
-    <h1>Data Product Portfolio</h1>
-    <p>Building interactive analytics tools with React, Python, and Modern Web Tech.</p>
-  </div>
-
-  <h2>Live Dashboards</h2>
-  
-  <div class="project-grid">
+  <div class="docs-grid">
     
-    <a href="/projects/twins" class="project-card">
-      <div class="icon-box" style="background: #002B5C; color: white;">
-        <Trophy size={32} />
-      </div>
-      <div class="content">
-        <h3>Twins Analytics Suite</h3>
-        <p>120+ years of historical data visualization including payroll trends, win/loss records, and attendance analysis.</p>
-        <span class="tag">React</span> <span class="tag">Recharts</span>
-      </div>
-    </a>
+    <div class="content-area">
+      
+      <header class="post-header">
+        <h1>Engineering Log</h1>
+        <p style="color: #94a3b8; font-size: 1.1rem; margin-top: 0.5rem;">
+          Documenting the build process, data experiments, and technical challenges.
+        </p>
+      </header>
 
-    <div class="project-card coming-soon">
-      <div class="icon-box" style="background: #ddd; color: #666;">
-        <TrendingUp size={32} />
+      <hr class="divider" />
+
+      <div class="blog-grid">
+        {sortedPosts.map(post => (
+          <a href={`/blog/${post.slug}`} class="blog-card">
+            <span class="post-date">{post.data.pubDate.toISOString().slice(0,10)}</span>
+            <h3>{post.data.title}</h3>
+            <p>{post.data.description}</p>
+            <div class="read-more">Read Article →</div>
+          </a>
+        ))}
       </div>
-      <div class="content">
-        <h3>Sales Forecasting</h3>
-        <p>Coming soon: A predictive model using Python and Prophet.</p>
-        <span class="tag">Python</span>
-      </div>
+
     </div>
 
+    <aside class="sidebar">
+      <div class="sidebar-inner">
+        
+        <div style="margin-bottom: 2rem;">
+          <SearchWidget client:load posts={allPosts} />
+        </div>
+
+        <h3>All Posts</h3>
+        <ul class="post-list">
+          {sortedPosts.map(post => (
+            <li>
+              <a href={`/blog/${post.slug}`}>
+                {post.data.title}
+                <span class="date-small">{post.data.pubDate.toISOString().slice(0,10)}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </aside>
+
   </div>
-<h2 style="margin-top: 4rem;">Latest Updates</h2>
-<div class="blog-grid">
-  {recentPosts.map(post => (
-    <a href={`/blog/${post.slug}`} class="blog-card">
-      <span class="post-date">{post.data.pubDate.toISOString().slice(0,10)}</span>
-      <h3>{post.data.title}</h3>
-      <p>{post.data.description}</p>
-    </a>
-  ))}
-</div>
+
 </MainLayout>
+
+<style>
+  /* Slight override to ensure the grid fits nicely in the content area */
+  .blog-grid {
+    grid-template-columns: 1fr; /* Stack cards in this view */
+  }
+  
+  @media (min-width: 1024px) {
+    .blog-grid { grid-template-columns: repeat(2, 1fr); } /* 2 columns on wide screens */
+  }
+</style>
