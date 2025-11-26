@@ -1,9 +1,11 @@
 /* src/styles/global.css */
-
+html {
+  font-size: 14.5px;
+}
 /* Base Reset */
-body { 
-  margin: 0; 
-  font-family: system-ui, -apple-system, sans-serif; 
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, sans-serif;
   background-color: #0f172a; /* Deep Slate Background */
   color: #e2e8f0;            /* Soft White Text */
   min-height: 100vh;
@@ -23,21 +25,21 @@ nav {
 }
 
 /* Logo */
-.logo { 
-  font-weight: 800; 
-  font-size: 1.5rem; 
-  text-decoration: none; 
+.logo {
+  font-weight: 800;
+  font-size: 1.5rem;
+  text-decoration: none;
   color: #f8fafc;
   letter-spacing: -0.05em;
 }
 
 /* Navigation Links */
-.nav-links a { 
-  color: #94a3b8; 
-  text-decoration: none; 
-  margin-left: 16px; 
+.nav-links a {
+  color: #94a3b8;
+  text-decoration: none;
+  margin-left: 16px;
   font-weight: 500;
-  transition: color 0.2s ease; 
+  transition: color 0.2s ease;
 }
 
 .nav-links {
@@ -46,13 +48,13 @@ nav {
   gap: 8px;            /* Space between items */
 }
 
-.nav-links a:hover { 
+.nav-links a:hover {
   color: #38bdf8; /* Cyan Glow */
 }
 
 /* Content Container */
-main { 
-  max-width: 1200px; 
-  margin: 0 auto; 
-  padding: 2rem; 
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
 }
