@@ -4,24 +4,37 @@
 .hero { padding: 4rem 0; text-align: center; }
 h1 { font-size: 3rem; margin-bottom: 0.75rem; color: #f8fafc; letter-spacing: -0.025em; }
 p { color: #94a3b8; font-size: 1.25rem; line-height: 1.75; }
-h2 { color: #e2e8f0; margin-top: 4rem; border-bottom: 1px solid #1e293b; padding-bottom: 1rem; font-size: 1.8rem; }
 
-/* Grid System */
-.project-grid, .blog-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
+/* Headers */
+h2 { 
+  color: #e2e8f0; 
+  margin-top: 6rem;       
+  margin-bottom: 2rem;    
+  border-bottom: 1px solid #1e293b; 
+  padding-bottom: 1rem; 
+  font-size: 1.8rem; 
 }
 
-/* --- SHARED CARD STYLES --- */
+/* --- GRID SYSTEM (The Spacing Fix) --- */
+.project-grid, .blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  
+  /* THE FIX: Tight horizontal, Wide vertical */
+  column-gap: 2rem;  /* Normal spacing side-by-side */
+  row-gap: 4rem;     /* Big spacing when stacked (Mobile) */
+  
+  margin-bottom: 6rem;    
+}
+
+/* --- CARD STYLES --- */
 .project-card, .blog-card {
-  background: #1e293b;       /* Slate 800 */
+  background: #1e293b;
   border-radius: 12px;
-  padding: 1rem;
+  padding: 1.5rem;          
   text-decoration: none;
-  color: #e2e8f0;            /* Light Text */
-  border: 1px solid #334155; /* Subtle Border */
+  color: #e2e8f0;
+  border: 1px solid #334155;
   transition: all 0.3s ease-in-out;
   display: flex;
   flex-direction: column;
@@ -29,32 +42,31 @@ h2 { color: #e2e8f0; margin-top: 4rem; border-bottom: 1px solid #1e293b; padding
   height: 100%;
 }
 
-/* --- BLUE THEME (Projects) --- */
+/* --- THEMES --- */
 .project-card:hover {
   transform: translateY(-5px);
   border-color: #38bdf8;
   box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.15);
 }
 
-/* --- TEAL THEME (Blog Posts) --- */
 .blog-card:hover {
   transform: translateY(-5px);
   border-color: #2dd4bf;
   box-shadow: 0 10px 30px -10px rgba(45, 212, 191, 0.15);
 }
 
-/* Card Content */
+/* Content */
 h3 { margin: 0; font-size: 1.5rem; color: #f8fafc; font-weight: 700; }
 
 .content p, .blog-card p { 
   font-size: 1rem; 
   color: #cbd5e1; 
-  line-height: 1.5;
+  line-height: 1.6;
   margin: 0;
   flex-grow: 1;
 }
 
-/* Meta Data */
+/* Meta */
 .post-date { 
   font-size: 0.75rem; 
   color: #2dd4bf; 
@@ -72,10 +84,10 @@ h3 { margin: 0; font-size: 1.5rem; color: #f8fafc; font-weight: 700; }
   font-weight: 600;
 }
 
-/* Icons & Tags */
+/* Icons */
 .icon-box {
-  padding: 15px;
-  border-radius: 9px;
+  padding: 12px;
+  border-radius: 8px;
   background: #0f172a;
   border: 1px solid #334155;
   display: inline-flex;
@@ -94,4 +106,12 @@ h3 { margin: 0; font-size: 1.5rem; color: #f8fafc; font-weight: 700; }
   font-size: 0.75rem;
   font-weight: 600;
   border: 1px solid #475569;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+  .project-grid, .blog-grid {
+    /* Ensure vertical gap stays big on mobile */
+    row-gap: 4rem; 
+  }
 }
