@@ -68,39 +68,41 @@ src/
 │   ├── blog/          # Dynamic Blog Routes
 │   └── projects/      # Dashboard Pages
 └── styles/            # Modular CSS Files (global, cards, search)
-⚡ Local Development
+```
+
+##⚡ Local Development
 To run this portfolio locally:
 
 Clone the repo:
 
-Bash
+```Bash
 
 git clone [https://github.com/patbritton/portfolio.git](https://github.com/patbritton/portfolio.git)
 cd portfolio
 Install dependencies:
+```
 
-Bash
+```Bash
 
 npm install
 Run the Dev Server:
+```
 
-Bash
+```Bash
 
 npm run dev
 Visit http://localhost:4321 to see the app.
+```
 
-🔄 Deployment Pipeline
+## 🔄 Deployment Pipeline
 This project uses a CI/CD pipeline defined in .github/workflows/deploy.yml.
 
-Code is pushed to main.
+* Code is pushed to main.
 
-GitHub Actions logs into the VPS via SSH.
+* GitHub Actions logs into the VPS via SSH.
 
-It pulls the latest changes and installs Node dependencies.
+* It pulls the latest changes and installs Node dependencies.
 
-It runs npm run build to generate the static dist/ folder.
+* It runs npm run build to generate the static dist/ folder.
 
-Permissions are updated to ensure Nginx read access.
-
-Author
-Patrick Britton Data Analyst & Full Stack Engineer GitHub | LinkedIn
+* Permissions are updated to ensure Nginx read access.
