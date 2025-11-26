@@ -459,3 +459,71 @@
   border: 1px solid #334155;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
 }
+
+/* --- Mobile Dashboard Fixes --- */
+@media (max-width: 768px) {
+  
+  /* 1. Fix the Header Area */
+  .header-content {
+    flex-direction: column; /* Stack title and buttons */
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+
+  .main-title {
+    font-size: 2rem; /* Shrink huge title */
+    line-height: 1.1;
+  }
+
+  /* 2. Fix the Buttons */
+  .button-group {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Side-by-side buttons */
+    gap: 10px;
+  }
+
+  .btn {
+    justify-content: center;
+    width: 100%;
+    font-size: 0.85rem;
+    padding: 10px;
+  }
+
+  /* 3. Fix the Filter/Slider Bar */
+  .filter-card {
+    flex-direction: column; /* Stack filters vertically */
+    align-items: stretch;   /* Stretch to full width */
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  .filter-group {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  /* Force sliders to fit the screen */
+  .year-slider, input[type="range"] {
+    width: 100% !important; /* Override inline width */
+    flex-grow: 1;
+    max-width: none;
+  }
+
+  /* 4. Fix the Metrics Grid */
+  .metrics-grid {
+    grid-template-columns: 1fr 1fr; /* 2 columns instead of auto-fit */
+    gap: 12px;
+  }
+
+  .metric-value {
+    font-size: 1.8rem; /* Slightly smaller numbers */
+  }
+}
+
+/* Extra small screens (iPhone SE, etc) */
+@media (max-width: 400px) {
+  .metrics-grid {
+    grid-template-columns: 1fr; /* 1 column for very small screens */
+  }
+}

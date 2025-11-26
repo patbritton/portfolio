@@ -58,3 +58,28 @@ main {
   margin: 0 auto;
   padding: 2rem;
 }
+
+/* --- Mobile Header Fixes --- */
+@media (max-width: 768px) {
+  nav {
+    padding: 0.75rem 1rem; /* Reduce padding */
+  }
+
+  .logo {
+    font-size: 1.2rem; /* Smaller logo */
+  }
+
+  .nav-links {
+    gap: 10px; /* Tighter spacing between items */
+  }
+
+  .nav-links a {
+    margin-left: 10px; /* Tighter link spacing */
+    font-size: 0.85rem; /* Smaller text */
+  }
+
+  /* Hide "Home" text on mobile to save space (Logo acts as Home) */
+  .nav-links a[href="/"] {
+    display: none;
+  }
+}
