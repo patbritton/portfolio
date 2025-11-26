@@ -1,43 +1,75 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
-import { projects } from '../../data/projects.js';
-import '../../styles/projects.css';
+import { getCollection } from 'astro:content';
+import SearchWidget from '../../components/SearchWidget.jsx';
+import '../../styles/blog-layout.css'; // Re-use the sidebar CSS
+import '../../styles/cards.css';       // Re-use card styling for the list
+
+// Fetch posts
+const allPosts = await getCollection('blog');
+const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
-<MainLayout title="Dashboards">
+<MainLayout title="Blog">
   
-  <div class="dash-header">
-    <h1>Live Dashboards</h1>
-    <p>Interactive data applications and visualizations.</p>
-  </div>
+  <div class="docs-grid">
+    
+    <div class="content-area">
+      
+      <header class="post-header">
+        <h1>Engineering Log</h1>
+        <p style="color: #94a3b8; font-size: 1.1rem; margin-top: 0.5rem;">
+          Documenting the build process, data experiments, and technical challenges.
+        </p>
+      </header>
 
-  <div class="dashboard-grid">
-    {projects.map(project => (
-      <a href={project.link} class="dash-card">
+      <hr class="divider" />
+
+      <div class="blog-grid">
+        {sortedPosts.map(post => (
+          <a href={`/blog/${post.slug}`} class="blog-card">
+            <span class="post-date">{post.data.pubDate.toISOString().slice(0,10)}</span>
+            <h3>{post.data.title}</h3>
+            <p>{post.data.description}</p>
+            <div class="read-more">Read Article →</div>
+          </a>
+        ))}
+      </div>
+
+    </div>
+
+    <aside class="sidebar">
+      <div class="sidebar-inner">
         
-        <div class="preview-area" style={`background: radial-gradient(circle at center, ${project.color}1a 0%, #0f172a 70%);`}>
-          {project.image ? (
-            <img src={project.image} alt={project.title} class="preview-img" />
-          ) : (
-            <project.icon size={64} color={project.color} className="placeholder-icon" />
-          )}
+        <div style="margin-bottom: 2rem;">
+          <SearchWidget client:load posts={allPosts} />
         </div>
 
-        <div class="card-content">
-          <h3>{project.title}</h3>
-          <p>{project.description}</p>
-          
-          <div class="tech-stack">
-            {project.tags.map(tag => (
-              <span class="tech-tag">{tag}</span>
-            ))}
-          </div>
+        <h3>All Posts</h3>
+        <ul class="post-list">
+          {sortedPosts.map(post => (
+            <li>
+              <a href={`/blog/${post.slug}`}>
+                {post.data.title}
+                <span class="date-small">{post.data.pubDate.toISOString().slice(0,10)}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </aside>
 
-          <div class="launch-btn">Launch Dashboard →</div>
-        </div>
-
-      </a>
-    ))}
   </div>
 
 </MainLayout>
+
+<style>
+  /* Slight override to ensure the grid fits nicely in the content area */
+  .blog-grid {
+    grid-template-columns: 1fr; /* Stack cards in this view */
+  }
+  
+  @media (min-width: 1024px) {
+    .blog-grid { grid-template-columns: repeat(2, 1fr); } /* 2 columns on wide screens */
+  }
+</style>
