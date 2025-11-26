@@ -1,5 +1,6 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
+import '../styles/cards.css'; // <-- Imports the cards/grids
 import { Trophy, TrendingUp } from 'lucide-react'; // Using icons for flair
 import { getCollection } from 'astro:content';
 const allPosts = await getCollection('blog');
@@ -51,71 +52,4 @@ const recentPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pu
     </a>
   ))}
 </div>
-
-<style>
-  /* Add these simple styles */
-  .blog-grid { display: grid; gap: 1.5rem; }
-  .blog-card { 
-    background: white; padding: 1.5rem; border-radius: 8px; border: 1px solid #e2e8f0; 
-    text-decoration: none; color: inherit; transition: border-color 0.2s;
-  }
-  .blog-card:hover { border-color: #0f172a; }
-  .post-date { font-size: 0.85rem; color: #64748b; }
-  .blog-card h3 { margin: 0.5rem 0; font-size: 1.25rem; color: #0f172a; }
-  .blog-card p { color: #475569; margin: 0; }
-</style>
 </MainLayout>
-
-<style>
-  .hero { padding: 4rem 0; text-align: center; }
-  h1 { font-size: 3rem; margin-bottom: 0.5rem; color: #0f172a; }
-  p { color: #64748b; font-size: 1.2rem; }
-
-  .project-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
-  }
-
-  .project-card {
-    background: white;
-    border-radius: 12px;
-    padding: 2rem;
-    text-decoration: none;
-    color: inherit;
-    border: 1px solid #e2e8f0;
-    transition: transform 0.2s, box-shadow 0.2s;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-  }
-
-  .project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-    border-color: #cbd5e1;
-  }
-
-  .icon-box {
-    padding: 12px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  h3 { margin: 0; font-size: 1.5rem; color: #0f172a; }
-  .content p { font-size: 1rem; margin: 0.5rem 0 1rem 0; }
-
-  .tag {
-    background: #f1f5f9;
-    color: #475569;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    margin-right: 8px;
-  }
-</style>

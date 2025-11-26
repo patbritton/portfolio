@@ -1,0 +1,52 @@
+/* src/styles/global.css */
+
+/* Base Reset */
+body { 
+  margin: 0; 
+  font-family: system-ui, -apple-system, sans-serif; 
+  background-color: #0f172a; /* Deep Slate Background */
+  color: #e2e8f0;            /* Soft White Text */
+  min-height: 100vh;
+}
+
+/* The Header */
+nav {
+  background-color: #0f172a;
+  border-bottom: 1px solid #1e293b;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* Logo */
+.logo { 
+  font-weight: 800; 
+  font-size: 1.5rem; 
+  text-decoration: none; 
+  color: #f8fafc;
+  letter-spacing: -0.05em;
+}
+
+/* Navigation Links */
+.nav-links a { 
+  color: #94a3b8; 
+  text-decoration: none; 
+  margin-left: 24px; 
+  font-weight: 500;
+  transition: color 0.2s ease; 
+}
+
+.nav-links a:hover { 
+  color: #38bdf8; /* Cyan Glow */
+}
+
+/* Content Container */
+main { 
+  max-width: 1200px; 
+  margin: 0 auto; 
+  padding: 2rem; 
+}
