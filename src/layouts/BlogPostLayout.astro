@@ -57,7 +57,7 @@ const dateStr = new Date(frontmatter.pubDate).toLocaleDateString('en-US', {
 
 <script>
   // Simple Share Logic
-  document.getElementById('shareBtn').addEventListener('click', async () => {
+  document.getElementById('shareBtn')?.addEventListener('click', async () => {
     if (navigator.share) {
       try {
         await navigator.share({
