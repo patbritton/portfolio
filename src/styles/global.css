@@ -39,6 +39,20 @@ nav {
   padding: 0;
 }
 
+.logo-group {
+  display: flex;
+  align-items: center;
+}
+
+.tagline {
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1;
+  color: hsla(210, 50%, 70%, 0.2);
+  font-style: italic;
+
+}
+
 /* Navigation Links */
 .nav-links a { 
   color: #94a3b8; 

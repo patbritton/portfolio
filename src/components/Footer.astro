@@ -1,5 +1,5 @@
 ---
-import { Github, Linkedin, Mail, MapPin } from 'lucide-react';
+import { Github, Linkedin, Mail, MapPin, RssIcon } from 'lucide-react';
 import '../styles/footer.css';
 const today = new Date();
 ---
@@ -31,11 +31,11 @@ const today = new Date();
         <a href="https://github.com/patbritton" target="_blank" aria-label="GitHub">
           <Github size={20} />
         </a>
-        <a href="https://linkedin.com/in/YOUR_LINKEDIN_USER" target="_blank" aria-label="LinkedIn">
-          <Linkedin size={20} />
-        </a>
         <a href="mailto:patrick@mp.ls" aria-label="Email">
           <Mail size={20} />
+        </a>
+        <a href="/rss.xml" aria-label="RSS Feed">
+          <RssIcon size={20} />
         </a>
       </div>
     </div>
