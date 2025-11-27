@@ -364,7 +364,7 @@ const TwinsDashboard = () => {
           <div className="chart-card full-width-card">
             <h3 className="chart-title">Franchise Payroll History</h3>
             <ResponsiveContainer width="100%" height={300}>
-              <AreaChart data={data.filter(d => d.Payroll !== null)}>
+              <AreaChart data={data.filter(d => d.Payroll !== null && d.Year >= 1985)}>
                 <defs>
                   <linearGradient id="colorPayroll" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor={chartColors.payroll} stopOpacity={0.6}/>

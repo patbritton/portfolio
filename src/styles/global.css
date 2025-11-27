@@ -17,7 +17,6 @@ nav {
   border-bottom: 1px solid #1e293b;
   padding: 0 2rem;
   height: 70px;
-  max-height: 70px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -33,25 +32,35 @@ nav {
   text-decoration: none;
   color: #f8fafc;
   letter-spacing: -0.05em;
+  display: flex;
+  align-items: center;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
 }
 
 /* Navigation Links */
-.nav-links a {
-  color: #94a3b8;
-  text-decoration: none;
-  margin-left: 16px;
+.nav-links a { 
+  color: #94a3b8; 
+  text-decoration: none; 
   font-weight: 500;
-  transition: color 0.2s ease;
+  font-size: 0.95rem;
+  transition: color 0.2s ease; 
+  padding: 0;
+  margin: 0;
 }
 
 .nav-links {
   display: flex;
-  align-items: center; /* Ensures search icon aligns with text */
-  gap: 8px;            /* Space between items */
+  align-items: center;
+  gap: 24px;
+  height: 100%;
+  margin-bottom: 8px;
 }
 
-.nav-links a:hover {
-  color: #38bdf8; /* Cyan Glow */
+.nav-links a:hover { 
+  color: #38bdf8;
+  background: transparent;
 }
 
 /* Content Container */
