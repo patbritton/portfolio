@@ -2,7 +2,7 @@
 title: "Upgrading from WordPress: Architecting a Modern Data Portfolio"
 description: "A deep dive into why I chose Astro and React for my portfolio, and how I built a robust, searchable data application platform."
 pubDate: 2025-11-26
-tags: ["Astro", "React", "CI/CD", "UX"]
+tags: ["Astro", "React", "CI-CD", "UX"]
 ---
 
 # The Migration: From Static Site to Data App Shell

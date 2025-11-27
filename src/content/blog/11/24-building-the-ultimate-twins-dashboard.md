@@ -2,7 +2,7 @@
 title: "Building the Ultimate Twins Analytics Dashboard"
 description: "How I engineered a full-stack, interactive data platform to visualize 120+ years of Twins history, powered by live Google Sheet data."
 pubDate: 2025-11-26
-tags: ["Data Visualization", "React", "Astro", "CI/CD"]
+tags: ["Data Visualization", "React", "Astro", "CI-CD"]
 ---
 
 # The Pitch
