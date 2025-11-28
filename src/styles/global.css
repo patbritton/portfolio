@@ -45,12 +45,19 @@ nav {
 }
 
 .tagline {
-  font-size: 1.5rem;
-  font-weight: 400;
+  font-size: 1.4rem;
+  font-weight: 300;
   line-height: 1;
   color: hsla(210, 50%, 70%, 0.2);
   font-style: italic;
 
+}
+
+@media screen and (max-width: 800px) {
+  .tagline {
+    visibility: hidden;
+    display: none;
+  }
 }
 
 /* Navigation Links */
@@ -81,7 +88,7 @@ nav {
 main {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem;
 }
 
 /* --- Mobile Header Fixes --- */
