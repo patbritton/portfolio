@@ -1,4 +1,5 @@
 ---
+import ContactWindow from '../components/ContactWindows.jsx';
 import MainLayout from '../layouts/MainLayout.astro';
 import '../styles/cards.css'; // <-- Imports the cards/grids
 import { Trophy, TrendingUp } from 'lucide-react'; // Using icons for flair
@@ -26,39 +27,9 @@ const recentPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pu
       </div>
     </div>
 
-    <div class="hero-stats">
-      <div class="stat-card">
-        <div class="stat-header">
-          <span class="dot red"></span>
-          <span class="dot yellow"></span>
-          <span class="dot green"></span>
-          <span class="stat-title">patrick_britton.py</span>
-        </div>
-        <div class="stat-body">
-          <div class="stat-row">
-            <span class="key">Role:</span>
-            <span class="value string">"Business Data Analyst"</span>
-          </div>
-          <div class="stat-row">
-            <span class="key">Location:</span>
-            <span class="value string">"Minneapolis, MN"</span>
-          </div>
-          <div class="stat-row">
-            <span class="key">Focus:</span>
-            <span class="value array">["Visualization", "Engineering"]</span>
-          </div>
-          <div class="stat-row border-top">
-            <span class="comment"># Core Competencies</span>
-          </div>
-          <div class="skill-tags">
-            <span class="code-tag">Python</span>
-            <span class="code-tag">SQL</span>
-            <span class="code-tag">React</span>
-            <span class="code-tag">Tableau</span>
-          </div>
-        </div>
-      </div>
-    </div>
+   <div class="hero-stats">
+  <ContactWindow client:load />
+</div>
 
   </div>
 
