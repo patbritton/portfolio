@@ -2,6 +2,8 @@ import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import node from '@astrojs/node'; // 1. Import Node
 
+import sitemap from '@astrojs/sitemap';
+
 export default defineConfig({
   site: 'https://patrick.mp.ls',
   
@@ -13,5 +15,5 @@ export default defineConfig({
     mode: 'standalone'
   }),
 
-  integrations: [react()],
+  integrations: [react(), sitemap()],
 });
