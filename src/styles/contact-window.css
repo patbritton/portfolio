@@ -12,8 +12,8 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
   box-shadow: 
-    0 20px 50px -12px rgba(0, 0, 0, 0.7), /* Deep Drop Shadow */
-    inset 0 1px 0 rgba(255, 255, 255, 0.1); /* Top Highlight */
+    0 20px 50px -12px rgba(0, 0, 0, 0.7), 
+    inset 0 1px 0 rgba(255, 255, 255, 0.1); 
   
   font-family: 'Segoe UI Variable', 'Segoe UI', sans-serif;
   color: #fff;
@@ -26,7 +26,7 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* --- HEADER BAR --- */
+/* --- HEADER BAR (Title & Controls) --- */
 .win11-header {
   display: flex;
   justify-content: space-between;
@@ -45,13 +45,9 @@
   color: #ccc;
 }
 
-.app-icon { color: #60cdff; } /* Windows 11 Blue */
+.app-icon { color: #60cdff; } 
 
-/* Window Controls (Min/Max/Close) */
-.win11-controls {
-  display: flex;
-  height: 100%;
-}
+.win11-controls { display: flex; height: 100%; }
 
 .control-btn {
   width: 46px;
@@ -62,49 +58,46 @@
   transition: background 0.15s;
   color: #fff;
 }
-
 .control-btn:hover { background: rgba(255, 255, 255, 0.1); }
-.control-btn.close:hover { background: #c42b1c; } /* Windows Red */
+.control-btn.close:hover { background: #c42b1c; } 
 
-/* --- TOOLBAR --- */
+/* --- TOOLBAR (Buttons) --- */
 .win11-toolbar {
   padding: 8px 12px;
   display: flex;
-  gap: 8px;
+  justify-content: space-between; /* pushes buttons to far left and right */
+  align-items: center;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.send-btn {
-  background: #60cdff; /* Accent Blue */
-  color: #000;
+/* Base style for Send/Reset buttons (NO size control) */
+.send-btn, .reset-btn {
   border: none;
-  padding: 6px 16px;
   border-radius: 4px;
-  font-size: 13px;
+  font-size: 1rem; /* Inherit size */
   font-weight: 600;
   display: flex;
   align-items: center;
   gap: 6px;
+  height: 36px;
   cursor: pointer;
-  transition: filter 0.2s;
+  padding: 6px 12px; /* Standard compact button padding */
+  transition: all 0.2s;
+}
+
+/* Send Button Specifics */
+.send-btn {
+  background: #60cdff; 
+  color: #000;
 }
 .send-btn:hover { filter: brightness(1.1); }
+.send-btn:disabled { opacity: 0.7; cursor: not-allowed; }
 
-.attach-btn {
-  background: transparent;
-  color: #fff;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 4px;
-  font-size: 13px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-}
-.attach-btn:hover { background: rgba(255, 255, 255, 0.05); }
+/* Reset Button Specifics */
 
-/* --- FORM BODY --- */
+.reset-btn svg { color: #fff; }
+
+/* --- FORM INPUTS --- */
 .win11-body {
   padding: 16px 20px;
   display: flex;
@@ -142,15 +135,9 @@ input, select {
   outline: none;
 }
 
-input::placeholder { color: #555; }
+select option { background: #222; color: #fff; }
 
-/* Select Dropdown Styling */
-select option {
-  background: #222;
-  color: #fff;
-}
-
-/* --- TEXTAREA --- */
+/* Text Area */
 .editor-area {
   margin-top: 8px;
   flex-grow: 1;
@@ -169,7 +156,33 @@ textarea {
   font-family: inherit;
 }
 
-/* --- SUCCESS STATE --- */
+/* --- INTERACTIVITY & SUCCESS STATE --- */
+
+/* Sending Animation */
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Attachment Chip (Removed from final JSX but keeping style) */
+.attachment-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: #fff;
+  width: fit-content;
+  margin-top: 4px;
+}
+
+/* Success State */
 .success-state {
   text-align: center;
   padding: 40px;
@@ -186,59 +199,15 @@ textarea {
 }
 
 .reset-btn {
+  /* Style reset button in success screen */
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.1);
   color: #fff;
   padding: 8px 16px;
+  height: 36px;
   border-radius: 4px;
+  align-self: flex-end;
   cursor: pointer;
-  margin-top: 16px;
+  margin-top: 5px;
 }
 .reset-btn:hover { background: rgba(255, 255, 255, 0.2); }
-
-/* --- NEW STYLES FOR INTERACTIVITY --- */
-
-/* Sending Animation */
-.spin {
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-/* Disabled button state */
-.send-btn:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
-}
-
-/* Attachment Chip (Shows up when file selected) */
-.attachment-chip {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 12px;
-  color: #fff;
-  width: fit-content;
-  margin-top: 4px;
-}
-
-.attachment-chip button {
-  background: none;
-  border: none;
-  color: #999;
-  cursor: pointer;
-  padding: 0;
-  display: flex;
-  align-items: center;
-}
-
-.attachment-chip button:hover {
-  color: #fff;
-}
