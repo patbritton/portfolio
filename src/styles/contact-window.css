@@ -185,6 +185,7 @@ textarea {
 /* Success State */
 .success-state {
   text-align: center;
+  margin: 0 auto;
   padding: 40px;
 }
 
