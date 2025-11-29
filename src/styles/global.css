@@ -6,9 +6,11 @@ html {
 body {
   margin: 0;
   font-family: system-ui, -apple-system, sans-serif;
-  background-color: #0f172a; /* Deep Slate Background */
+  background-color: hsl(222, 47%, 11%); /* Deep Slate Background */
   color: #e2e8f0;            /* Soft White Text */
   min-height: 100vh;
+  margin: 0 auto;
+  max-width: 1024px;
 }
 
 /* The Header */
