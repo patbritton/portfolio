@@ -1,3 +1,4 @@
+/** @jsxImportSource react */
 import { ImageResponse } from "@vercel/og";
 import { getCollection } from "astro:content";
 
@@ -8,7 +9,6 @@ export const config = {
 export async function GET({ params }) {
   const { slug } = params;
 
-  // Load the blog post
   const posts = await getCollection("blog");
   const post = posts.find((p) => p.slug === slug);
 
@@ -30,30 +30,32 @@ export async function GET({ params }) {
           color: "#f8fafc",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "space-between",
-          padding: "60px 80px",
+          justifyContent: "center",
+          padding: "80px",
           fontFamily: "sans-serif",
         }}
       >
-        <div style={{ fontSize: 72, fontWeight: 700, lineHeight: 1.1 }}>
+        <div style={{ fontSize: 72, fontWeight: 700, lineHeight: 1.2 }}>
           {title}
         </div>
 
-        <div
-          style={{
-            fontSize: 32,
-            opacity: 0.8,
-            marginTop: "20px",
-          }}
-        >
-          {tagString}
-        </div>
+        {tagString && (
+          <div
+            style={{
+              fontSize: 32,
+              color: "#94a3b8",
+              marginTop: "40px",
+            }}
+          >
+            {tagString}
+          </div>
+        )}
 
         <div
           style={{
-            fontSize: 32,
+            fontSize: 36,
             color: "#2dd4bf",
-            marginTop: "40px",
+            marginTop: "auto",
           }}
         >
           Patrick’s Data Lab

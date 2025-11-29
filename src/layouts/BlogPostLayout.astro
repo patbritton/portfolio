@@ -41,17 +41,18 @@ const modifiedTime = frontmatter.updatedDate?.toISOString?.() || publishedTime;
 <html lang="en">
   <head>
     <!-- SEO Fully Wired -->
-    <SEO 
-      title={title}
-      description={description}
-      canonicalUrl={Astro.url.href}
-      image={frontmatter.image}           // optional
-      siteName="Patrick's Data Lab"
-      type="article"
-      tags={tags}
-      publishedTime={publishedTime}
-      modifiedTime={modifiedTime}
-    />
+<SEO
+  title={title}
+  description={description}
+  canonicalUrl={Astro.url.href}
+  image={frontmatter.image}
+  siteName="Patrick's Data Lab"
+  type="article"
+  tags={tags}
+  publishedTime={publishedTime}
+  modifiedTime={modifiedTime}
+/>
+
 
     <!-- RSS Feed -->
     <link rel="alternate" type="application/rss+xml" title="Patrick's Data Lab" href="/rss.xml" />
