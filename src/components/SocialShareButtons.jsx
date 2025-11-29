@@ -1,53 +1,71 @@
-import React from 'react';
-import { Mail, Linkedin, Share2, Link } from 'lucide-react';
+import React from "react";
+import { Mail, Linkedin, Share2, Link as LinkIcon } from "lucide-react";
 
 const SocialShareButtons = ({ title, url }) => {
-  
-  // 1. Native Web Share API (Best for Mobile & Modern Desktop)
-  const handleNativeShare = () => {
-    if (navigator.share) {
-      navigator.share({
-        title: title,
-        url: url,
-        text: `Check out this data analysis by Patrick Britton: ${title}`
-      }).catch(error => console.log('Error sharing', error));
-    } else {
-      // Fallback for Desktop: Copy link
-      navigator.clipboard.writeText(url);
-      alert('Link copied to clipboard!');
+
+  const handleNativeShare = async () => {
+    try {
+      if (navigator.share) {
+        await navigator.share({
+          title,
+          text: `Check out this data analysis by Patrick Britton: ${title}`,
+          url
+        });
+      } else {
+        await navigator.clipboard.writeText(url);
+        alert("Link copied to clipboard!");
+      }
+    } catch (err) {
+      console.error("Share failed:", err);
     }
   };
 
-  // 2. LinkedIn Link Generator
-  const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}`;
-  
-  // 3. Email Link Generator
-  const mailtoUrl = `mailto:?subject=${encodeURIComponent(title)}&body=I found this interesting post: ${encodeURIComponent(url)}`;
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(url);
+      alert("Link copied!");
+    } catch {
+      console.error("Clipboard failed, fallback");
+      const temp = document.createElement("input");
+      temp.value = url;
+      document.body.appendChild(temp);
+      temp.select();
+      document.execCommand("copy");
+      temp.remove();
+      alert("Link copied!");
+    }
+  };
+
+  const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
+
+  const mailtoUrl = `mailto:?subject=${encodeURIComponent(
+    title
+  )}&body=${encodeURIComponent(`I found this interesting post:\n${url}`)}`;
 
   return (
     <div className="social-share-bar">
-      
-      {/* 1. Share/Copy Link */}
+
       <button onClick={handleNativeShare} className="share-btn native-share">
         <Share2 size={20} />
-        <span>Share Post</span>
+        <span>Share</span>
       </button>
 
-      {/* 2. LinkedIn */}
-      <a href={linkedInUrl} target="_blank" rel="noopener noreferrer" className="share-btn linkedin">
+      <a
+        href={linkedInUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="share-btn linkedin"
+      >
         <Linkedin size={20} />
       </a>
 
-      {/* 3. Email */}
       <a href={mailtoUrl} className="share-btn email">
         <Mail size={20} />
       </a>
-      
-      {/* 4. Direct Copy Link (Visible on desktop) */}
-       <button onClick={() => navigator.clipboard.writeText(url)} className="share-btn copy-link">
-        <Link size={20} />
-      </button>
 
+      <button onClick={handleCopy} className="share-btn copy-link">
+        <LinkIcon size={20} />
+      </button>
     </div>
   );
 };
