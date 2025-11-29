@@ -1,8 +1,11 @@
 ---
+// Set to false for safety, as we are serving server-side for now
+export const prerender = false; 
+
 import { getCollection } from 'astro:content';
 import BlogPostLayout from '../../layouts/BlogPostLayout.astro';
 
-// 1. Generate a route for every file in /src/content/blog/
+// 1. Generate all valid blog URLs
 export async function getStaticPaths() {
   const blogEntries = await getCollection('blog');
   return blogEntries.map(entry => ({
@@ -10,11 +13,19 @@ export async function getStaticPaths() {
   }));
 }
 
-// 2. Get the specific post data
+// 2. Retrieve data from props
 const { entry } = Astro.props;
+
+// 3. CRITICAL CHECK: If the entry is undefined (404), redirect instantly
+if (!entry) {
+  // If no post is found for this URL, send a 404 response
+  return Astro.redirect('/404', 404); 
+}
+
+// 4. Render content
 const { Content } = await entry.render();
 ---
 
-<BlogPostLayout frontmatter={entry.data}>
+<BlogPostLayout frontmatter={entry.data} slug={entry.slug}>
   <Content />
 </BlogPostLayout>
