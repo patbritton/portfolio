@@ -1,10 +1,12 @@
 ---
 import ContactWindow from '../components/ContactWindows.jsx';
+export const prerender = true;
 import MainLayout from '../layouts/MainLayout.astro';
 import '../styles/cards.css'; // <-- Imports the cards/grids
 import { Trophy, TrendingUp } from 'lucide-react'; // Using icons for flair
 import { getCollection } from 'astro:content';
 const allPosts = await getCollection('blog');
+
 // Sort by date (newest first) and take top 3
 const recentPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()).slice(0, 3);
 ---
