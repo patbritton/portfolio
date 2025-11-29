@@ -14,30 +14,18 @@ const dateStr = new Date(frontmatter.pubDate).toLocaleDateString('en-US', {
   year: 'numeric', month: 'long', day: 'numeric'
 });
 
-// --- JSON-LD SCHEMA GENERATION (Top Script) ---
-const schema = {
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": `https://patrick.mp.ls/blog/${frontmatter.slug}/` 
-  },
-  "headline": frontmatter.title,
-  "description": frontmatter.description,
-  "image": "https://patrick.mp.ls/images/og-image.png",
-  "author": {
-    "@type": "Person",
-    "name": "Patrick Britton"
-  },
-  "datePublished": frontmatter.pubDate.toISOString(),
-  "dateModified": frontmatter.pubDate.toISOString()
-};
-// --- END SCHEMA GENERATION ---
+// Pass necessary props to MainLayout for the SEO component
+const title = frontmatter.title;
+const description = frontmatter.description;
+const canonicalPath = `/blog/${frontmatter.slug}/`;
+const ogType = "article"; // Set specific type for blog posts
+// Use frontmatter.image if available, otherwise MainLayout uses the default
+
+// Removed the manual JSON-LD schema generation script.
+// It is now handled automatically by the SEO component, with type="article".
 ---
 
-<script type="application/ld+json" set:html={JSON.stringify(schema)} />
-
-<MainLayout title={frontmatter.title}>
+<MainLayout title={title} description={description} canonicalUrl={canonicalPath} type={ogType}>
   
   <div class="docs-grid">
     

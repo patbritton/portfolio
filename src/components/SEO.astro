@@ -1,0 +1,107 @@
+---
+// SEO.astro
+// A reusable component to handle all essential metadata for SEO and social sharing,
+// excluding Twitter/X specific tags.
+
+// Define the required props for the component.
+interface Props {
+  // Title for the <title> tag and Open Graph/Schema.org
+  title: string;
+  // Short description for meta description and Open Graph/Schema.org
+  description: string;
+  // Full, absolute URL of the page (Astro.url.pathname is usually passed here)
+  canonicalUrl: string;
+  // Full, absolute URL to the preview image (1200x630px is recommended)
+  image?: string;
+  // Site name (e.g., "Jane Doe's Portfolio")
+  siteName: string;
+  // Use "article" for blog posts and "website" for portfolio pages/home
+  type?: 'website' | 'article';
+}
+
+const {
+  title,
+  description,
+  canonicalUrl,
+  image,
+  siteName,
+  type = 'website',
+} = Astro.props;
+
+// --- Default and Fallback Values ---
+
+// The canonical URL is crucial for preventing duplicate content issues.
+// Note: Astro.site is pulled from astro.config.mjs
+const siteUrl = Astro.site?.toString() || 'https://example.com';
+const fullCanonicalUrl = canonicalUrl.startsWith(siteUrl) ? canonicalUrl : `${siteUrl}${canonicalUrl}`;
+// Assuming 'og-image.png' is placed directly in your /public/images directory
+const defaultImage = image || `${siteUrl}/images/og-image.png`; 
+
+// --- Article Specific Tags ---
+const isArticle = type === 'article';
+---
+
+<!-- ========================================================================= -->
+<!-- 1. CORE SEO TAGS (Used by Google, Bing, etc.) -->
+<!-- ========================================================================= -->
+
+<!-- Title Tag (Crucial for SEO and click-through rate) -->
+<title>{title}</title>
+
+<!-- Meta Description (Used in search results snippet) -->
+<meta name="description" content={description} />
+
+<!-- Canonical URL (Directs search engines to the preferred version of the page) -->
+<link rel="canonical" href={fullCanonicalUrl} />
+
+<!-- ========================================================================= -->
+<!-- 2. OPEN GRAPH TAGS (For Facebook, LinkedIn, Bluesky, Discord, etc.) -->
+<!-- ========================================================================= -->
+
+<!-- Basic required OG tags -->
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={fullCanonicalUrl} />
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content={siteName} />
+
+<!-- OG Image Tag (What appears in the preview card) -->
+<meta property="og:image" content={defaultImage} />
+<!-- Recommended image dimensions for high-res displays -->
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={title} />
+
+<!-- Optional: Article specific Open Graph tags -->
+{
+  isArticle && (
+    <>
+      <meta property="article:published_time" content={new Date().toISOString()} />
+      {/* Add more article:tag tags for categories if needed */}
+    </>
+  )
+}
+
+<!-- ========================================================================= -->
+<!-- 3. SCHEMA.ORG STRUCTURED DATA (JSON-LD) -->
+<!-- ========================================================================= -->
+
+<script type="application/ld+json" set:html={`
+  {
+    "@context": "https://schema.org",
+    "@type": "${isArticle ? 'BlogPosting' : 'WebSite'}",
+    "url": "${fullCanonicalUrl}",
+    "headline": "${title}",
+    "name": "${siteName}",
+    "description": "${description}",
+    ${isArticle ? '"author": { "@type": "Person", "name": "Patrick Britton" },' : ''}
+    "image": "${defaultImage}"
+  }
+`} />
+
+<!-- ========================================================================= -->
+<!-- 4. TECHNICAL SEO -->
+<!-- ========================================================================= -->
+
+<!-- Viewport (Essential for mobile-first indexing) -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
