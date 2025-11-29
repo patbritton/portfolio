@@ -6,7 +6,7 @@ export default defineConfig({
   site: 'https://patrick.mp.ls',
   
   // 2. Switch to Hybrid (Mostly static, some dynamic)
-  output: 'hybrid',
+  output: 'server',
   
   // 3. Add the Adapter
   adapter: node({
