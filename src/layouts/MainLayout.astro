@@ -21,7 +21,7 @@ const defaultImage = "https://patrick.mp.ls/images/og-image.png"; // Your defaul
     <SEO
       title={title ? `${title} | Patrick's Data Lab` : defaultTitle}
       description={description || defaultDescription}
-      canonicalUrl={Astro.url.pathname}
+      canonicalUrl={Astro.url.href}
       siteName="Patrick's Data Lab" 
       image={defaultImage}
       type="website" 
