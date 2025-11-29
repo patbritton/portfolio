@@ -1,6 +1,6 @@
 ---
-// Set to false for safety, as we are serving server-side for now
-export const prerender = false; 
+// CRITICAL: This is required in 'server' mode to build the HTML files.
+export const prerender = true; 
 
 import { getCollection } from 'astro:content';
 import BlogPostLayout from '../../layouts/BlogPostLayout.astro';
@@ -8,24 +8,27 @@ import BlogPostLayout from '../../layouts/BlogPostLayout.astro';
 // 1. Generate all valid blog URLs
 export async function getStaticPaths() {
   const blogEntries = await getCollection('blog');
+
+  // Map every entry to its full file path (slug)
   return blogEntries.map(entry => ({
-    params: { slug: entry.slug }, props: { entry },
+    // The params.slug will now include the nested folders: 2025/11/post-name
+    params: { slug: entry.slug }, 
+    props: { entry },
   }));
 }
 
 // 2. Retrieve data from props
 const { entry } = Astro.props;
 
-// 3. CRITICAL CHECK: If the entry is undefined (404), redirect instantly
+// CRITICAL CHECK: If the entry is undefined (404), send a clean redirect
 if (!entry) {
-  // If no post is found for this URL, send a 404 response
   return Astro.redirect('/404', 404); 
 }
 
-// 4. Render content
+// 3. Render content
 const { Content } = await entry.render();
 ---
 
-<BlogPostLayout frontmatter={entry.data} slug={entry.slug}>
+<BlogPostLayout frontmatter={entry.data}>
   <Content />
 </BlogPostLayout>
