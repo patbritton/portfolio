@@ -11,7 +11,7 @@ export async function getStaticPaths() {
 
   // Map every entry to its full file path (slug)
   return blogEntries.map(entry => ({
-    // This is correct: it captures the full path including nested folders (e.g., 2025/11/post-name)
+    // This is the correct way to handle nested directories (e.g., 2025/11/post-name)
     params: { slug: entry.slug }, 
     props: { entry },
   }));
@@ -20,9 +20,8 @@ export async function getStaticPaths() {
 // 2. Retrieve data from props
 const { entry } = Astro.props;
 
-// CRITICAL CHECK: If the entry is undefined (404), send a clean redirect
+// CRITICAL CHECK: Send a clean 404 if the post is not found
 if (!entry) {
-  // If no post is found for this URL, send a 404 response
   return Astro.redirect('/404', 404); 
 }
 

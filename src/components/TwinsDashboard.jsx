@@ -13,11 +13,11 @@ import '../styles/TwinsDashboard.css';
 
 const TwinsDashboard = () => {
   const [darkMode, setDarkMode] = useState(true);
-  const [yearRange, setYearRange] = useState([1901, 2026]);
+  const [yearRange, setYearRange] = useState([1901, 2025]);
   const [showPlayoffsOnly, setShowPlayoffsOnly] = useState(false);
   const [minWins, setMinWins] = useState(0);
   const [selectedMetric, setSelectedMetric] = useState(null);
-  const [focusYear, setFocusYear] = useState(2026);
+  const [focusYear, setFocusYear] = useState(2025);
 
   // --- STATE FOR EXTERNAL DATA ---
   const [allData, setAllData] = useState([]);
@@ -213,7 +213,7 @@ const TwinsDashboard = () => {
           <div className="header-content">
             <div>
               <h1 className="main-title">Minnesota Twins Analytics</h1>
-              <p className="sub-title">Interactive Analysis • 1901-2026</p>
+              <p className="sub-title">Interactive Analysis • 1901-2025</p>
             </div>
             <div className="button-group">
               <button onClick={exportToCSV} className="btn btn-primary">
@@ -234,7 +234,7 @@ const TwinsDashboard = () => {
             <input 
               type="range" 
               min={yearRange[0]} 
-              max={2026} 
+              max={2025} 
               value={focusYear} 
               onChange={(e) => setFocusYear(parseInt(e.target.value))}
               className="year-slider"

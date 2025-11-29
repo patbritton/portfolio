@@ -1,7 +1,7 @@
 ---
 title: "Building the Ultimate Twins Analytics Dashboard"
 description: "How I engineered a full-stack, interactive data platform to visualize 120+ years of Twins history, powered by live Google Sheet data."
-pubDate: 2026-11-26
+pubDate: 2025-11-25
 tags: ["Data Visualization", "React", "Astro", "CI-CD"]
 ---
 
@@ -24,7 +24,7 @@ The project's architecture has been upgraded to true dynamic data sourcing.
 The dashboard is now a powerful analysis tool built on React's state management capabilities.
 
 ### Key Features Added:
-* **Time Machine Controls:** Users can scrub the `Focus Year` slider to instantly update the metric cards for any season in history (1901–2026).
+* **Time Machine Controls:** Users can scrub the `Focus Year` slider to instantly update the metric cards for any season in history (1901–2025).
 * **Deep-Dive Modals:** Clicking any metric card (Wins, Payroll, Attendance) opens a full-screen modal showing a **zoomable Area Chart** for that specific metric's historical trend.
 * **Historical Context:** The `Avg Attendance` metric is now hardcoded to show the reliable 1960–Present average, providing stable context regardless of the current interactive filters.
 * **Global Search & Tags:** The entire portfolio uses a **Spotlight Search** (Cmd+K) and **Tagging System** built on static routing, making content easily discoverable.

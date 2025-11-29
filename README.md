@@ -31,7 +31,7 @@ An interactive deep-dive into **120+ years** of Minnesota Twins/Washington Senat
 > **Goal:** Move beyond static Excel charts to allow users to ask their own questions about the data.
 
 **Capabilities:**
-* **The Time Machine:** Scrub through history (1901–2026) to compare eras.
+* **The Time Machine:** Scrub through history (1901–2025) to compare eras.
 * **Sandbox Mode:** Users can swap X/Y axes to find correlations (e.g., *Payroll vs. Wins* or *Attendance vs. Home Runs*).
 * **Drill-Down Modals:** Click any metric card for historical rankings and deep-dive trend lines.
 * **Composite Dataset:** Merged historical Retrosheet data with modern payroll figures, excluding statistical anomalies (2020 COVID season).
