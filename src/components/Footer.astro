@@ -1,5 +1,5 @@
 ---
-import { Github, Linkedin, Mail, MapPin, RssIcon } from 'lucide-react';
+import { Github, Linkedin, Mail, Heart, MapPin, RssIcon } from 'lucide-react';
 import '../styles/footer.css';
 const today = new Date();
 ---
@@ -44,6 +44,6 @@ const today = new Date();
 
   <div class="bottom-bar">
     <p>&copy; {today.getFullYear()} Patrick Britton. All rights reserved.</p>
-    <p class="stack-info">Built with <a href="https://astro.build/" target="_blank">Astro</a>, <a href="https://react.dev/" target="_blank">React</a> & <a href="https://recharts.github.io/" target="_blank">Recharts</a>.</p>
+    <p class="stack-info">Built with <a href="https://astro.build/" target="_blank">Astro</a>, <a href="https://react.dev/" target="_blank">React</a>, <a href="https://recharts.github.io/" target="_blank">Recharts</a> & <Heart size={14} color="#A48ACF" /> in Minnesota.</p>
   </div>
 </footer>

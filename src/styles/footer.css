@@ -37,7 +37,7 @@ footer {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #64748b;
+  color: #87ade2;
   font-size: 0.9rem;
 }
 
@@ -97,23 +97,23 @@ footer h4 {
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 1rem;
-  color: #6483ad;
+  color: #94a8c4;
   font-size: 0.9rem;
 }
 
 .bottom-bar a {
   text-decoration: none;
-  color: #b00ce2;
+  color: #e9c1f7;
 }
 .bottom-bar a:hover {
-  color:#334155;
+  color:#97bbee;
 }
 .bottom-bar a:visited {
-  color:#b00ce2;
+  color:#d791ec;
 }
 
 .stack-info {
-  color: #475569;
+  color: #96afd3;
 }
 
 @media (max-width: 768px) {
