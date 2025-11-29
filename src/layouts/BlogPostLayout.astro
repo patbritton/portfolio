@@ -2,9 +2,7 @@
 import MainLayout from './MainLayout.astro';
 import { getCollection } from 'astro:content';
 import SearchWidget from '../components/SearchWidget.jsx';
-
-// Import the new CSS file
-import '../styles/blog-layout.css';
+import '../styles/blog-layout.css'; 
 
 const { frontmatter } = Astro.props;
 
@@ -15,7 +13,29 @@ const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pu
 const dateStr = new Date(frontmatter.pubDate).toLocaleDateString('en-US', {
   year: 'numeric', month: 'long', day: 'numeric'
 });
+
+// --- JSON-LD SCHEMA GENERATION (Top Script) ---
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": `https://patrick.mp.ls/blog/${frontmatter.slug}/` 
+  },
+  "headline": frontmatter.title,
+  "description": frontmatter.description,
+  "image": "https://patrick.mp.ls/images/og-image.png",
+  "author": {
+    "@type": "Person",
+    "name": "Patrick Britton"
+  },
+  "datePublished": frontmatter.pubDate.toISOString(),
+  "dateModified": frontmatter.pubDate.toISOString()
+};
+// --- END SCHEMA GENERATION ---
 ---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
 
 <MainLayout title={frontmatter.title}>
   
@@ -42,9 +62,7 @@ const dateStr = new Date(frontmatter.pubDate).toLocaleDateString('en-US', {
 
     <aside class="sidebar">
       <div class="sidebar-inner">
-        
         <SearchWidget client:load posts={allPosts} />
-
         <h3>Recent Updates</h3>
         <ul class="post-list">
           {sortedPosts.map(post => (
