@@ -4,16 +4,35 @@ import { getCollection } from 'astro:content';
 import SearchWidget from '../components/SearchWidget.jsx';
 import '../styles/blog-layout.css'; 
 import SocialShareButtons from '../components/SocialShareButtons.jsx';
+
 const { frontmatter } = Astro.props;
+
+// All posts
 const allPosts = await getCollection('blog');
-const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const sortedPosts = allPosts.sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+// Date formatted
 const dateStr = new Date(frontmatter.pubDate).toLocaleDateString('en-US', {
   year: 'numeric', month: 'long', day: 'numeric'
 });
+
+// Title + Description
 const title = frontmatter.title;
 const description = frontmatter.description;
+
+// Canonical path for SEO
 const canonicalPath = `/blog/${frontmatter.slug}/`;
-const ogType = "article"; // Set specific type for blog posts
+
+// OG metadata
+const ogType = "article";
+
+// Full absolute page URL for sharing
+const postUrl = Astro.url.href;
+
+// Share title
+const postTitle = title;
 ---
 
 <MainLayout title={title} description={description} canonicalUrl={canonicalPath} type={ogType}>
@@ -21,17 +40,15 @@ const ogType = "article"; // Set specific type for blog posts
   <div class="docs-grid">
     
     <article class="content-area">
+
       <header class="post-header">
         <span class="post-date">{dateStr}</span>
         <h1>{frontmatter.title}</h1>
-        
-        <div class="tags">
-          {frontmatter.tags && frontmatter.tags.map(tag => (
-            <a href={`/tags/${tag}`} class="tag">#{tag}</a>
-          ))}
-          
+
+        <!-- SHARE BUTTONS MOVED HERE (below the title) -->
+        <div class="share-container">
+          <SocialShareButtons title={postTitle} url={postUrl} client:load />
         </div>
-        
       </header>
 
       <hr class="divider" />
@@ -39,17 +56,21 @@ const ogType = "article"; // Set specific type for blog posts
       <div class="prose">
         <slot />
       </div>
-      <SocialShareButtons 
-      client:load 
-      title={frontmatter.title} 
-      url={`https://patrick.mp.ls/blog/${frontmatter.slug}/`} 
-    />
+
+      <!-- TAGS MOVED HERE (bottom of the article) -->
+      <div class="tags tags-bottom">
+        {frontmatter.tags && frontmatter.tags.map(tag => (
+          <a href={`/tags/${tag}`} class="tag">#{tag}</a>
+        ))}
+      </div>
+
     </article>
 
     <aside class="sidebar">
       <div class="sidebar-inner">
         <SearchWidget client:load posts={allPosts} />
         <h3>Recent Updates</h3>
+
         <ul class="post-list">
           {sortedPosts.map(post => (
             <li>
@@ -58,13 +79,15 @@ const ogType = "article"; // Set specific type for blog posts
                 class={frontmatter.title === post.data.title ? 'active' : ''}
               >
                 {post.data.title}
-                <span class="date-small">{post.data.pubDate.toISOString().slice(0,10)}</span>
+                <span class="date-small">
+                  {post.data.pubDate.toISOString().slice(0, 10)}
+                </span>
               </a>
             </li>
           ))}
         </ul>
+
       </div>
-      
     </aside>
 
   </div>

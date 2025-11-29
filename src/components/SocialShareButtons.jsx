@@ -1,7 +1,10 @@
 import React from "react";
 import { Mail, Linkedin, Share2, Link as LinkIcon } from "lucide-react";
 
-const SocialShareButtons = ({ title, url }) => {
+const SocialShareButtons = ({ title, url: propUrl }) => {
+  // If parent did not pass url, use the current page URL
+  const url =
+    propUrl || (typeof window !== "undefined" ? window.location.href : "");
 
   const handleNativeShare = async () => {
     try {
@@ -25,7 +28,7 @@ const SocialShareButtons = ({ title, url }) => {
       await navigator.clipboard.writeText(url);
       alert("Link copied!");
     } catch {
-      console.error("Clipboard failed, fallback");
+      // fallback for older browsers
       const temp = document.createElement("input");
       temp.value = url;
       document.body.appendChild(temp);
@@ -36,7 +39,9 @@ const SocialShareButtons = ({ title, url }) => {
     }
   };
 
-  const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
+  const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
+    url
+  )}`;
 
   const mailtoUrl = `mailto:?subject=${encodeURIComponent(
     title
@@ -44,7 +49,6 @@ const SocialShareButtons = ({ title, url }) => {
 
   return (
     <div className="social-share-bar">
-
       <button onClick={handleNativeShare} className="share-btn native-share">
         <Share2 size={20} />
         <span>Share</span>
