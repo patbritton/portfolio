@@ -3,26 +3,17 @@ import MainLayout from './MainLayout.astro';
 import { getCollection } from 'astro:content';
 import SearchWidget from '../components/SearchWidget.jsx';
 import '../styles/blog-layout.css'; 
-
+import SocialShareButtons from '../components/SocialShareButtons.jsx';
 const { frontmatter } = Astro.props;
-
-// Fetch posts for sidebar navigation
 const allPosts = await getCollection('blog');
 const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-
 const dateStr = new Date(frontmatter.pubDate).toLocaleDateString('en-US', {
   year: 'numeric', month: 'long', day: 'numeric'
 });
-
-// Pass necessary props to MainLayout for the SEO component
 const title = frontmatter.title;
 const description = frontmatter.description;
 const canonicalPath = `/blog/${frontmatter.slug}/`;
 const ogType = "article"; // Set specific type for blog posts
-// Use frontmatter.image if available, otherwise MainLayout uses the default
-
-// Removed the manual JSON-LD schema generation script.
-// It is now handled automatically by the SEO component, with type="article".
 ---
 
 <MainLayout title={title} description={description} canonicalUrl={canonicalPath} type={ogType}>
@@ -38,7 +29,9 @@ const ogType = "article"; // Set specific type for blog posts
           {frontmatter.tags && frontmatter.tags.map(tag => (
             <a href={`/tags/${tag}`} class="tag">#{tag}</a>
           ))}
+          
         </div>
+        
       </header>
 
       <hr class="divider" />
@@ -46,6 +39,11 @@ const ogType = "article"; // Set specific type for blog posts
       <div class="prose">
         <slot />
       </div>
+      <SocialShareButtons 
+      client:load 
+      title={frontmatter.title} 
+      url={`https://patrick.mp.ls/blog/${frontmatter.slug}/`} 
+    />
     </article>
 
     <aside class="sidebar">
@@ -66,6 +64,7 @@ const ogType = "article"; // Set specific type for blog posts
           ))}
         </ul>
       </div>
+      
     </aside>
 
   </div>
