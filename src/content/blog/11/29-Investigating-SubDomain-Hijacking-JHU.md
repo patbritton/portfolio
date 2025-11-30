@@ -1,11 +1,11 @@
 ---
-title: "Apparent Subdomain Hijacking of Stripe.JHU.edu: A Case Study in DNS Vulnerability"
+title: "Subdomain Hijacking of Stripe.JHU.edu: A Case Study in DNS Vulnerability"
 description: "Analysis of the technical indicators suggesting that the stripe.jhu.edu subdomain has been compromised and redirected to an unassociated spam blog."
 pubDate: 2025-11-28
 tags: ["Cybersecurity", "DNS", "Subdomain Hijacking", "Web Security"]
 ---
 
-# Subdomain Hijacking of Stripe.JHU.edu
+## Subdomain Hijacking of Stripe.JHU.edu
 
 The subdomain **`stripe.jhu.edu`**, previously hosting an institutional page, appears to have been compromised and redirected to an unauthorized external spam blog. This incident serves as a critical case study in how simple misconfigurations or breaches in DNS records can lead to serious security and reputational risks for large organizations.
 

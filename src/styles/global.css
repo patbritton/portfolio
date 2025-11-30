@@ -25,11 +25,9 @@ nav {
   );
   border-bottom: 1px solid #1e293b;
   height: 70px;
-
   display: flex;
   justify-content: center; /* Center the inner header */
   align-items: center;
-
   position: sticky;
   top: 0;
   z-index: 100;
@@ -40,7 +38,6 @@ nav {
   width: 100%;
   max-width: 1024px; /* Matches the site's content width */
   padding: 0 2rem;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -51,7 +48,7 @@ nav {
   line-height: 1;          /* prevents extra vertical space */
   display: flex;
   align-items: center;
-  padding-top: 8px;        /* fine-tune vertical centering */
+  padding-top: 12px;        /* fine-tune vertical centering */
 }
 
 .logo-group {
@@ -64,7 +61,7 @@ nav {
   display:flex;
   align-items: center;
   font-weight: 300;
-  padding-top: 8px;
+  padding-top: 12px;
   line-height: 1;
   color: hsla(210, 50%, 70%, 0.2);
   font-style: italic;
