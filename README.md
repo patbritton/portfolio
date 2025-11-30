@@ -1,28 +1,27 @@
 # Patrick's Data Lab 🧪
 
-![Project Status](https://img.shields.io/badge/Status-Live-success)
-![Tech Stack](https://img.shields.io/badge/Built%20With-Astro%20%7C%20React%20%7C%20Recharts-blueviolet)
-![Deployment](https://img.shields.io/badge/Deploy-VPS%20%2B%20Nginx-orange)
+![Project Status](https://img.shields.io/badge/Status-Live%20Data%20App-success)
+![Tech Stack](https://img.shields.io/badge/Built%20With-Astro%20(Node.js)%20%7C%20React%20%7C%20Recharts-blueviolet)
+![Deployment](https://img.shields.io/badge/Deployment-CI%2FCD%20%2B%20Nginx%2FPM2-orange)
 
-A modern **Data Product Portfolio** designed to bridge the gap between static analysis and interactive software engineering. 
+A modern **Data Product Portfolio** designed to bridge the gap between static analysis and interactive software engineering. It is structured as a high-performance, full-stack data application.
 
 **Live Site:** [https://patrick.mp.ls](https://patrick.mp.ls)
 
----
+***
 
 ## 🚀 About The Project
 
-This is not a standard WordPress portfolio. It is a custom-engineered **Data Application Platform** built to host interactive dashboards, visualizations, and technical case studies.
-
-It uses **Astro** as the "App Shell" to provide a high-performance static core, while hydrating **React** components on-demand for complex data interactivity (Islands Architecture).
+This platform is a custom-engineered **Hybrid Data Application Platform** built on the modern **Astro Islands Architecture**. It is engineered to host complex, interactive dashboards and technical case studies, demonstrating full-stack engineering skills.
 
 ### Key Features
-* **Hybrid Architecture:** Static HTML for content (SEO/Speed) + React for interactivity.
+* **Hybrid Architecture:** Uses Astro for server-side generated HTML content (SEO/Speed) and hydrates **React components** for interactivity on-demand (Islands).
+* **Spotlight Search:** Global, client-side fuzzy search (triggered by `Cmd+K` or `Ctrl+K`) that instantly filters all blog posts and tags.
+* **Dynamic Tagging:** Automatic generation of tag-specific pages (`/tags/[tag].astro`) for improved content discovery.
+* **Advanced SEO:** Utilizes dynamic Open Graph (OG) image generation via an Edge function (`/api/og/[slug].tsx`) and comprehensive JSON-LD schema for all articles and pages.
 * **Modular Design:** Decoupled logic and styling (`/src/styles`) for maintainability.
-* **Content Engine:** Markdown-based blog with a custom Tagging and Search system.
-* **Dark Mode:** Custom "Midnight" palette optimized for long reading sessions.
 
----
+***
 
 ## 📊 Featured Dashboard: Twins Analytics Suite
 
@@ -30,31 +29,31 @@ An interactive deep-dive into **120+ years** of Minnesota Twins/Washington Senat
 
 > **Goal:** Move beyond static Excel charts to allow users to ask their own questions about the data.
 
-**Capabilities:**
-* **The Time Machine:** Scrub through history (1901–2025) to compare eras.
-* **Sandbox Mode:** Users can swap X/Y axes to find correlations (e.g., *Payroll vs. Wins* or *Attendance vs. Home Runs*).
-* **Drill-Down Modals:** Click any metric card for historical rankings and deep-dive trend lines.
-* **Composite Dataset:** Merged historical Retrosheet data with modern payroll figures, excluding statistical anomalies (2020 COVID season).
+### Key Capabilities
+* **Live Data Source:** Data is dynamically fetched on page load from a **Live Google Sheet via its CSV export API** using `PapaParse`, requiring zero code changes for data updates.
+* **The Time Machine:** Users can scrub the `Focus Year` slider to instantly update all metric cards and chart reference lines for any season from 1901–2025.
+* **Deep-Dive Modals:** Click any metric card (e.g., Wins, Payroll, Attendance) to open a full-screen modal showing a **zoomable Area Chart** for that metric's historical trend and all-time ranking.
+* **Export:** Data for the currently filtered range can be exported directly to a CSV file.
 
----
+***
 
 ## 🛠️ Technical Stack
 
 ### Frontend & Engineering
-* **Framework:** [Astro](https://astro.build/) (Server-Side Generation)
+* **Framework:** [Astro](https://astro.build/) (`output: 'server'` with Node.js Adapter)
 * **UI Library:** [React](https://react.dev/) (Component Logic)
 * **Visualization:** [Recharts](https://recharts.org/) (SVG-based charting)
-* **Styling:** Custom CSS Variables (No heavy frameworks)
-* **Search:** Client-side fuzzy search with React state management
+* **Data Fetching:** `PapaParse` for CSV streaming
+* **Contact Form:** Handled by a **server endpoint** using **Nodemailer**
 
 ### DevOps & Infrastructure
-* **Server:** Ubuntu VPS (DigitalOcean/Linode)
-* **Web Server:** Nginx (Reverse Proxy)
-* **Security:** SSL/TLS via Certbot (Let's Encrypt)
-* **DNS:** Cloudflare
+* **Server:** Ubuntu VPS
+* **Adapter:** `@astrojs/node`
+* **Process Manager:** PM2 (Keeps the Node.js process running and handles restarts)
+* **Web Server:** Nginx (Acts as a reverse proxy)
 * **CI/CD:** GitHub Actions (Auto-deploys on push to `main`)
 
----
+***
 
 ## 📂 Project Structure
 
@@ -64,47 +63,43 @@ src/
 ├── content/           # Markdown Blog Posts (CMS)
 ├── layouts/           # Astro Layout Shells (Header, Footer)
 ├── pages/             # File-based Routing
-│   ├── api/           # JSON Data Endpoints
-│   ├── blog/          # Dynamic Blog Routes
+│   ├── api/           # Dynamic Server Endpoints (OG Images, Email)
+│   ├── blog/          # Dynamic Blog Routes ([...slug].astro)
 │   └── projects/      # Dashboard Pages
-└── styles/            # Modular CSS Files (global, cards, search)
+└── styles/            # Modular CSS Files (global, cards, search, etc.)
 ```
 
-##⚡ Local Development
+***
+
+## ⚡ Local Development
 To run this portfolio locally:
 
 Clone the repo:
 
-```Bash
-
+```bash
 git clone [https://github.com/patbritton/portfolio.git](https://github.com/patbritton/portfolio.git)
 cd portfolio
 ```
-## Install dependencies:
+Install dependencies:
 
-
-```Bash
-
+```bash
 npm install
 ```
-## Run the Dev Server:
+Run the Dev Server:
 
-```Bash
-
+```bash
 npm run dev
 ```
+Visit `http://localhost:4321` to see the app.
 
-## Visit http://localhost:4321 to see the app.
+***
 
 ## 🔄 Deployment Pipeline
-This project uses a CI/CD pipeline defined in .github/workflows/deploy.yml.
+This project uses a CI/CD pipeline defined in `.github/workflows/deploy.yml` that handles the server-side build and process management.
 
-* Code is pushed to main.
-
-* GitHub Actions logs into the VPS via SSH.
-
-* It pulls the latest changes and installs Node dependencies.
-
-* It runs npm run build to generate the static dist/ folder.
-
-* Permissions are updated to ensure Nginx read access.
+The deployment process is:
+1.  Code is pushed to `main`.
+2.  GitHub Actions logs into the VPS via SSH.
+3.  It runs `git reset --hard origin/main` and `npm install`.
+4.  It runs `npm run build` to generate the static assets and the Node.js server bundle (`dist/server/entry.mjs`).
+5.  It runs the **critical step** `pm2 restart portfolio` to load the new server bundle.
