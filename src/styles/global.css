@@ -1,44 +1,57 @@
-/* src/styles/global.css */
 html {
   font-size: 14.5px;
 }
+
 /* Base Reset */
 body {
   margin: 0;
   font-family: system-ui, -apple-system, sans-serif;
-  background-color: hsl(222, 47%, 11%); /* Deep Slate Background */
-  color: #e2e8f0;            /* Soft White Text */
+  background-color: hsl(222, 47%, 11%);
+  color: #e2e8f0;
   min-height: 100vh;
-  margin: 0 auto;
-  max-width: 1024px;
 }
 
-/* The Header */
+
+/* ================================================
+   HEADER
+   ================================================ */
+
 nav {
-  background-color: #0f172a;
+  background: linear-gradient(
+    to bottom,
+    #0f172a 0%,
+    #14213d 50%,
+    #1e293b 100%
+  );
   border-bottom: 1px solid #1e293b;
-  padding: 0 2rem;
   height: 70px;
+
   display: flex;
-  justify-content: space-between;
+  justify-content: center; /* Center the inner header */
   align-items: center;
+
   position: sticky;
   top: 0;
   z-index: 100;
 }
 
+/* Centering wrapper */
+.nav-inner {
+  width: 100%;
+  max-width: 1024px; /* Matches the site's content width */
+  padding: 0 2rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 /* Logo */
 .logo {
-  font-weight: 800;
-  font-size: 1.5rem;
-  text-decoration: none;
-  color: #f8fafc;
-  letter-spacing: -0.05em;
+  line-height: 1;          /* prevents extra vertical space */
   display: flex;
   align-items: center;
-  line-height: 1;
-  margin: 0;
-  padding: 0;
+  padding-top: 8px;        /* fine-tune vertical centering */
 }
 
 .logo-group {
@@ -48,11 +61,13 @@ nav {
 
 .tagline {
   font-size: 1.4rem;
+  display:flex;
+  align-items: center;
   font-weight: 300;
+  padding-top: 8px;
   line-height: 1;
   color: hsla(210, 50%, 70%, 0.2);
   font-style: italic;
-
 }
 
 @media screen and (max-width: 800px) {
@@ -63,6 +78,13 @@ nav {
 }
 
 /* Navigation Links */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  height: 100%;
+}
+
 .nav-links a { 
   color: #94a3b8; 
   text-decoration: none; 
@@ -71,14 +93,6 @@ nav {
   transition: color 0.2s ease; 
   padding: 0;
   margin: 0;
-}
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  height: 100%;
-  margin-bottom: 8px;
 }
 
 .nav-links a:hover { 
@@ -96,24 +110,47 @@ main {
 /* --- Mobile Header Fixes --- */
 @media (max-width: 768px) {
   nav {
-    padding: 0.75rem 1rem; /* Reduce padding */
+    padding: 0.75rem 1rem;
   }
 
   .logo {
-    font-size: 1.2rem; /* Smaller logo */
+    font-size: 1.2rem;
   }
 
   .nav-links {
-    gap: 10px; /* Tighter spacing between items */
+    gap: 10px;
   }
 
   .nav-links a {
-    margin-left: 10px; /* Tighter link spacing */
-    font-size: 0.85rem; /* Smaller text */
+    margin-left: 10px;
+    font-size: 0.85rem;
   }
 
-  /* Hide "Home" text on mobile to save space (Logo acts as Home) */
   .nav-links a[href="/"] {
     display: none;
   }
+}
+/* Full-width bar */
+.site-header {
+  background-color: #0f172a;
+  border-bottom: 1px solid #1e293b;
+  height: 70px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  display: flex;
+  justify-content: center; /* Centers the inner container */
+  align-items: center;
+}
+
+/* Center-aligned content matching the site's 1024px layout */
+.header-content {
+  width: 100%;
+  max-width: 1024px;  /* <— The important part */
+  padding: 0 2rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
