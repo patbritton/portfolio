@@ -74,10 +74,10 @@ const modTime = modifiedTime || pubTime;
 // Breadcrumb schema items
 // Filter out the root "blog" or "projects" segment unless it's the last one
 const breadcrumbs = segments.filter(seg => seg !== 'blog' && seg !== 'projects').map((seg, i) => ({
-  "@type": "ListItem",
-  position: i + 1,
-  name: seg.replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase()),
-  item: `${siteUrl}/${segments.slice(0, i + 1).join("/")}/`
+"@type": "ListItem",
+ position: i + 1,
+ name: seg.replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase()),
+ item: `${siteUrl}/${segments.slice(0, i + 1).join("/")}/`
 }));
 
 // Bluesky card type (matching OG)
@@ -85,27 +85,27 @@ const blueskyType = isArticle ? "article" : "website";
 
 // Global person schema
 const personSchema = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  name: authorName,
-  url: siteUrl,
-  sameAs: [
-    "https://bsky.app/profile/patrick.mp.ls",
-    "https://github.com/patbritton", // Corrected GitHub URL structure
-    "https://linkedin.com/in/patrick" // Placeholder LinkedIn
-  ]
+ "@context": "https://schema.org",
+ "@type": "Person",
+ name: authorName,
+ url: siteUrl,
+ sameAs: [
+ "https://bsky.app/profile/patrick.mp.ls",
+ "https://github.com/patbritton", // Corrected GitHub URL structure
+ "https://linkedin.com/in/patrick" // Placeholder LinkedIn
+]
 };
 
 // Global organization schema
 const orgSchema = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "Patrick’s Data Lab",
-  url: siteUrl,
-  logo: {
-    "@type": "ImageObject",
-    url: `${siteUrl}/favicon/favicon-96x96.png`
-  }
+ "@context": "https://schema.org",
+ "@type": "Organization",
+ name: "Patrick’s Data Lab",
+ url: siteUrl,
+ logo: {
+ "@type": "ImageObject",
+ url: `${siteUrl}/favicon/favicon-96x96.png`
+ }
 };
 ---
 
@@ -119,7 +119,7 @@ const orgSchema = {
 
 {/* Add keywords meta tag to help with keyword distribution score, though Google mostly ignores it */}
 {tags.length > 0 && (
-  <meta name="keywords" content={tags.join(", ")} />
+//  <meta name="keywords" content={tags.join(", ")} />
 )}
 
 <!-- ============================================= -->
