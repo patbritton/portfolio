@@ -1,0 +1,98 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import { RefreshCw, Layout, FileText } from 'lucide-react';
+export const prerender = true;
+---
+
+<MainLayout title="Page Not Found (404)" description="We couldn't find the page you were looking for. Return to the home page or explore the latest dashboards and blog posts.">
+  <div class="not-found-container">
+    <div class="error-code">404</div>
+    <h1>Page Not Found</h1>
+    <p class="error-message">
+      The dashboard, project, or blog post you are looking for does not exist or has been moved.
+    </p>
+
+    <div class="suggestions-grid">
+      <a href="/" class="suggestion-card">
+        <Layout size={32} />
+        <h2>Go to Home</h2>
+        <p>Return to the main portfolio index.</p>
+      </a>
+
+      <a href="/projects" class="suggestion-card">
+        <RefreshCw size={32} />
+        <h2>View Dashboards</h2>
+        <p>Explore all the live data visualizations and projects.</p>
+      </a>
+
+      <a href="/blog" class="suggestion-card">
+        <FileText size={32} />
+        <h2>Read the Blog</h2>
+        <p>Catch up on the latest technical and data updates.</p>
+      </a>
+    </div>
+
+  </div>
+</MainLayout>
+
+<style>
+  .not-found-container {
+    text-align: center;
+    padding: 6rem 1rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .error-code {
+    font-size: 8rem;
+    font-weight: 900;
+    line-height: 1;
+    color: #334155; /* Subtle dark slate color */
+    margin-bottom: 1rem;
+  }
+  h1 {
+    font-size: 2.5rem;
+    color: #f8fafc;
+    margin-bottom: 1rem;
+  }
+  .error-message {
+    color: #94a3b8;
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+  }
+
+  .suggestions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .suggestion-card {
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: #e2e8f0;
+    transition: all 0.2s;
+    display: block;
+  }
+  .suggestion-card:hover {
+    transform: translateY(-5px);
+    border-color: #38bdf8;
+    box-shadow: 0 10px 20px rgba(56, 189, 248, 0.1);
+  }
+  .suggestion-card svg {
+    color: #38bdf8;
+    margin-bottom: 0.75rem;
+  }
+  .suggestion-card h2 {
+    font-size: 1.25rem;
+    margin: 0 0 0.5rem 0;
+    color: #f8fafc;
+  }
+  .suggestion-card p {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    margin: 0;
+  }
+</style>
