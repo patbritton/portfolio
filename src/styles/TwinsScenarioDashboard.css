@@ -62,8 +62,8 @@
   font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
-  backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
   transition: all 0.25s ease;
   display: inline-flex;
   align-items: center;
@@ -229,6 +229,7 @@
 /* Range sliders - Enhanced with better gradients */
 input[type='range'] {
   -webkit-appearance: none;
+  appearance: none;
   width: 100%;
   height: 6px;
   border-radius: 4px;
@@ -442,6 +443,7 @@ input[type="checkbox"] {
   right: 0;
   bottom: 0;
   background: rgba(0, 0, 0, 0.75);
+  -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
