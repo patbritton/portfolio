@@ -37,6 +37,20 @@ An interactive deep-dive into **120+ years** of Minnesota Twins/Washington Senat
 
 ***
 
+## 🔮 New Tool: Sabermetric Modeling Lab
+
+A forward-looking **2026 Season Scenario Planner** that uses Pythagorean Expectation models to forecast team performance.
+
+> **Goal:** Simulate the impact of roster volatility and player health on playoff probabilities.
+
+### Key Capabilities
+* **Probability Engine:** Calculates projected Win/Loss records and Playoff Odds in real-time based on adjustable Team wRC+ (Offense) and FIP (Pitching) inputs.
+* **Scenario Presets:** Instantly toggle between "Optimistic," "Realistic," and "Doomsday" scenarios to see the floor and ceiling of the current roster.
+* **The "Buxton Factor":** A dedicated logic toggle that adjusts the model's offensive efficiency based on the historical availability of star player Byron Buxton.
+* **Visual Identity:** Features a dynamic "Glassmorphism" UI with real-time feedback loops.
+
+***
+
 ## 🛠️ Technical Stack
 
 ### Frontend & Engineering
@@ -59,13 +73,13 @@ An interactive deep-dive into **120+ years** of Minnesota Twins/Washington Senat
 
 ```text
 src/
-├── components/        # React Widgets (Search, Dashboards)
+├── components/        # React Widgets (Search, Dashboards, Scenario Planner)
 ├── content/           # Markdown Blog Posts (CMS)
 ├── layouts/           # Astro Layout Shells (Header, Footer)
 ├── pages/             # File-based Routing
 │   ├── api/           # Dynamic Server Endpoints (OG Images, Email)
 │   ├── blog/          # Dynamic Blog Routes ([...slug].astro)
-│   └── dashboards/      # Dashboard Pages
+│   └── dashboards/    # Dashboard Pages
 └── styles/            # Modular CSS Files (global, cards, search, etc.)
 ```
 
@@ -77,19 +91,22 @@ To run this portfolio locally:
 Clone the repo:
 
 ```bash
-git clone [https://github.com/patbritton/portfolio.git](https://github.com/patbritton/portfolio.git)
+git clone https://github.com/patbritton/portfolio.git
 cd portfolio
 ```
+
 Install dependencies:
 
 ```bash
 npm install
 ```
+
 Run the Dev Server:
 
 ```bash
 npm run dev
 ```
+
 Visit `http://localhost:4321` to see the app.
 
 ***
