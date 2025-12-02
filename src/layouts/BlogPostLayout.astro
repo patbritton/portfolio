@@ -16,6 +16,18 @@ const dateStr = date.toLocaleDateString('en-US', {
 });
 const pubTime = date.toISOString();
 
+// Check for and format the update date
+let modDateStr;
+let modTime;
+
+if (frontmatter.updatedDate) {
+  const modDate = new Date(frontmatter.updatedDate);
+  modDateStr = modDate.toLocaleDateString('en-US', {
+    year: 'numeric', month: 'long', day: 'numeric'
+  });
+  modTime = modDate.toISOString();
+}
+
 // Pass necessary props to MainLayout for the SEO component
 const title = frontmatter.title;
 const description = frontmatter.description;
@@ -23,7 +35,8 @@ const canonicalPath = `/blog/${frontmatter.slug}/`;
 const ogType = "article";
 const tags = frontmatter.tags || [];
 
-// The SEO component handles all schema, so we just pass the necessary data
+// Use updatedDate as modifiedTime for SEO if it exists, otherwise use pubDate
+const finalModifiedTime = modTime || pubTime;
 ---
 
 <MainLayout 
@@ -33,13 +46,20 @@ const tags = frontmatter.tags || [];
   type={ogType}
   tags={tags}
   publishedTime={pubTime}
+  modifiedTime={finalModifiedTime}
 >
   
   <div class="docs-grid">
     
     <article class="content-area">
       <header class="post-header">
-        <span class="post-date">{dateStr}</span>
+        <span class="post-date">
+          Published: {dateStr}
+          {modDateStr && (
+            // Display "Updated" label only if updatedDate exists
+            <span style={{marginLeft: '1rem', color: '#64748b'}}>Updated: {modDateStr}</span>
+          )}
+        </span>
         <h1>{frontmatter.title}</h1>
         
         <div class="tags">

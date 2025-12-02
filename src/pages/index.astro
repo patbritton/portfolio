@@ -3,7 +3,8 @@ import ContactWindow from '../components/ContactWindows.jsx';
 export const prerender = true;
 import MainLayout from '../layouts/MainLayout.astro';
 import '../styles/cards.css'; // <-- Imports the cards/grids
-import { Trophy, TrendingUp } from 'lucide-react'; // Using icons for flair
+import pkg from 'lucide-react';
+const { TrendingUp } = pkg; // Only need TrendingUp here for the Sales card
 import { getCollection } from 'astro:content';
 const allPosts = await getCollection('blog');
 
@@ -22,8 +23,8 @@ const recentPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pu
       </p>
       
       <div class="hero-actions">
-        <a href="/projects/twins" class="btn btn-primary">View Latest Dashboard</a>
-        <a href="https://github.com/patbritton" target="_blank" class="btn btn-secondary">
+        <a href="/dashboards/twins" class="btn btn-primary">View Latest Dashboard</a>
+        <a href="https://github.com/patbritton" target="_blank" class="btn btn-secondary" rel="noopener noreferrer">
           Review Code
         </a>
       </div>
@@ -39,13 +40,14 @@ const recentPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pu
   
   <div class="project-grid">
     
-    <a href="/projects/twins" class="project-card">
-      <div class="icon-box" style="background: #002B5C; color: white;">
-        <Trophy size={32} />
+    <a href="/dashboards/twins" class="project-card">
+      <div class="icon-box" style="background: #002B5C; color: white; padding: 0;">
+        <!-- Using the custom image path defined in dashboards.js, rendered directly -->
+        <img src="/images/twins-logo.png" alt="Twins Dashboard Logo" style="width: 100%; height: 100%; object-fit: contain; padding: 12px;"/>
       </div>
       <div class="content">
         <h3>Twins Analytics Suite</h3>
-        <p>120+ years of historical data visualization including payroll trends, win/loss records, and attendance analysis.</p>
+        <p>120+ years of historical data visualization including payroll trends, win-loss records, and attendance analysis.</p>
         <span class="tag">React</span> <span class="tag">Recharts</span>
       </div>
     </a>

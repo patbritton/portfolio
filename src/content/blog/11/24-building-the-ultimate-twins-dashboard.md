@@ -9,7 +9,7 @@ tags: ["Data Visualization", "React", "Astro", "CI-CD"]
 
 I set out to build more than a dashboard—I wanted an **Interactive Data Application** that lets users explore 120 years of Twins history without being limited by static reports. The project has evolved from a simple local file read to a live, self-updating analytics platform.
 
-You can view the live dashboard [here](/projects/twins).
+You can view the live dashboard [here](/dashboards/twins).
 
 ## 1. The Data Architecture: From Static Files to Live API
 

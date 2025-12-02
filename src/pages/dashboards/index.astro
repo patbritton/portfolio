@@ -1,8 +1,13 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
-import { projects } from '../../data/projects.js';
+import { dashboards } from '../../data/dashboards.js';
 export const prerender = true;
-import '../../styles/projects.css';
+import '../../styles/dashboards.css';
+
+// FIX: Importing icons explicitly using the pkg workaround
+import pkg from 'lucide-react';
+const { CircleDot, TrendingUp } = pkg;
+// The CircleDot icon is imported here to be used in the template's dynamic call.
 ---
 
 <MainLayout title="Dashboards">
@@ -13,13 +18,15 @@ import '../../styles/projects.css';
   </div>
 
   <div class="dashboard-grid">
-    {projects.map(project => (
+    {dashboards.map(project => (
       <a href={project.link} class="dash-card">
         
         <div class="preview-area" style={`background: radial-gradient(circle at center, ${project.color}1a 0%, #0f172a 70%);`}>
           {project.image ? (
+            // Renders the custom image defined in dashboards.js
             <img src={project.image} alt={project.title} class="preview-img" />
           ) : (
+            // Renders the Lucide icon fallback (e.g., for 'Sales Forecasting')
             <project.icon size={64} color={project.color} className="placeholder-icon" />
           )}
         </div>

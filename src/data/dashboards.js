@@ -1,16 +1,18 @@
-import { Trophy, TrendingUp, Activity } from 'lucide-react';
+// FIX: Using default import workaround for CommonJS module compatibility and correct icon name
+import pkg from 'lucide-react';
+const { CircleDot, TrendingUp, Activity } = pkg;
 
-export const projects = [
+export const dashboards = [
   {
     id: 'twins',
     title: "Twins Analytics Suite",
     description: "A comprehensive deep-dive into 120+ years of Minnesota Twins history. Features interactive payroll analysis, win-loss correlations, and attendance tracking.",
-    link: "/projects/twins",
+    link: "/dashboards/twins",
     tags: ["React", "Recharts", "Data Viz"],
-    icon: Trophy,
+    // --- ICON CORRECTED to CircleDot ---
+    icon: CircleDot, 
     color: "#38bdf8", // Cyan
-    // You will replace this with a real screenshot later: '/images/twins-preview.png'
-    image: null 
+    image: '/images/twins-logo.png' // Using the image path for a custom logo
   },
   {
     id: 'sales',

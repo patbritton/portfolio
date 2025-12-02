@@ -2,8 +2,11 @@
 title: "Subdomain Hijacking of Stripe.JHU.edu: A Case Study in DNS Vulnerability"
 description: "Analysis of the technical indicators suggesting that the stripe.jhu.edu subdomain has been compromised and redirected to an unassociated spam blog."
 pubDate: 2025-11-28
+updateDate: 2025-12-02
 tags: ["Cybersecurity", "DNS", "Subdomain Hijacking", "Web Security"]
 ---
+
+#### *Update:* (December 2, 2025): Johns Hopkins University IT has updated their DNS records and removed `stripe.jhu.edu`  from their authoritative name servers, effectively mitigating the subdomain hijacking vulnerability. This action prevents further unauthorized use of the subdomain and protects users from potential phishing or spam content.
 
 ## Subdomain Hijacking of Stripe.JHU.edu
 

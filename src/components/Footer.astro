@@ -21,7 +21,7 @@ const today = new Date();
       <h4>Explore</h4>
       <a href="/">Home</a>
       <a href="/about">About Me</a>
-      <a href="/projects">Dashboards</a>
+      <a href="/dashboards">Dashboards</a>
       <a href="/blog">Blog</a>
     </div>
 
@@ -32,24 +32,25 @@ const today = new Date();
           <Github size={20} />
         </a>
         <a href="mailto:patrick@mp.ls" aria-label="Email">
-          <Mail size={20} />
-        </a>
-        <a href="/rss.xml" aria-label="RSS Feed">
-          <RssIcon size={20} />
-        </a>
-      </div>
-    </div>
+ <Mail size={20} />
+ </a>
+ <a href="/rss.xml" aria-label="RSS Feed">
+ <RssIcon size={20} />
+ </a>
+ </div>
+ </div>
 
-  </div>
+ </div>
 
-  <div class="bottom-bar">
-    <p>&copy; {today.getFullYear()} Patrick Britton. All rights reserved.</p>
-    <p class="stack-info">
+ <div class="bottom-bar">
+ <p>&copy; {today.getFullYear()} Patrick Britton. All rights reserved. <br/>Data from MLBAM, Baseball Reference & FanGraphs.<br/>Minnesota Twins trademarks belong to the Minnesota <br/>Twins/MLB. Not affiliated with MLB.</p>
+ <p class="stack-info">
       Built with 
       <a href="https://astro.build/" target="_blank" rel="noopener noreferrer">Astro</a>, 
       <a href="https://react.dev/" target="_blank" rel="noopener noreferrer">React</a>, 
       <a href="https://recharts.github.io/" target="_blank" rel="noopener noreferrer">Recharts</a> & 
       <Heart size={14} color="#A48ACF" /> in Minnesota.
     </p>
-  </div>
+    
+ </div>
 </footer>

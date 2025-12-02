@@ -1,14 +1,6 @@
 ---
 /* =============================================
    SEO.astro — Fully upgraded SEO system
-   Includes:
-   • Dynamic OG Images (/api/og/[slug])
-   • Bluesky metadata
-   • Article + Website OG
-   • Full JSON-LD (BlogPosting / WebPage)
-   • Breadcrumb schema
-   • Person schema (Patrick Britton)
-   • Organization schema (Patrick’s Data Lab)
    ============================================
 */
 
@@ -39,7 +31,7 @@ const {
   authorName = "Patrick Britton"
 } = Astro.props;
 
-// Base site URL
+// Base site URL: Ensured consistent use of patrick.mp.ls
 const siteUrl = Astro.site?.toString() || "https://patrick.mp.ls";
 
 // Ensure canonical is absolute
@@ -50,15 +42,14 @@ const fullCanonicalUrl = canonicalUrl.startsWith("http")
 // Break URL into segments for breadcrumb + slug extraction
 const segments = fullCanonicalUrl
   .replace(siteUrl, "")
-  .split("?") // Ignore query parameters
+  .split("?") 
   .filter(Boolean)
-  .map(s => s.replace(/^\/|\/$/g, '')); // Trim leading/trailing slashes
+  .map(s => s.replace(/^\/|\/$/g, ''));
 
 // Extract last segment = blog slug (for dynamic OG). Check if we are on root or home
 const slug = segments.length > 0 && segments[segments.length - 1] !== 'home' ? segments[segments.length - 1] : '';
 
 // Auto OG Image (api route)
-// Only generate if a slug exists and we aren't overriding
 const autoImage = slug ? `${siteUrl}/api/og/${slug}` : `${siteUrl}/images/og-image.png`;
 
 // Final OG Image (manual override allowed)
@@ -72,12 +63,11 @@ const pubTime = publishedTime || new Date().toISOString();
 const modTime = modifiedTime || pubTime;
 
 // Breadcrumb schema items
-// Filter out the root "blog" or "projects" segment unless it's the last one
-const breadcrumbs = segments.filter(seg => seg !== 'blog' && seg !== 'projects').map((seg, i) => ({
-"@type": "ListItem",
- position: i + 1,
- name: seg.replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase()),
- item: `${siteUrl}/${segments.slice(0, i + 1).join("/")}/`
+const breadcrumbs = segments.filter(seg => seg !== 'blog' && seg !== 'dashboards').map((seg, i) => ({
+  "@type": "ListItem",
+  position: i + 1,
+  name: seg.replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase()),
+  item: `${siteUrl}/${segments.slice(0, i + 1).join("/")}/`
 }));
 
 // Bluesky card type (matching OG)
@@ -85,27 +75,29 @@ const blueskyType = isArticle ? "article" : "website";
 
 // Global person schema
 const personSchema = {
- "@context": "https://schema.org",
- "@type": "Person",
- name: authorName,
- url: siteUrl,
- sameAs: [
- "https://bsky.app/profile/patrick.mp.ls",
- "https://github.com/patbritton", // Corrected GitHub URL structure
- "https://linkedin.com/in/patrick" // Placeholder LinkedIn
-]
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: authorName,
+  url: siteUrl,
+  sameAs: [
+    // UPDATED BLUESKY HANDLE
+    "https://bsky.app/profile/ptricky3.bsky.social", 
+    "https://github.com/patbritton", 
+    // LINKEDIN REMOVED
+  ]
 };
 
 // Global organization schema
 const orgSchema = {
- "@context": "https://schema.org",
- "@type": "Organization",
- name: "Patrick’s Data Lab",
- url: siteUrl,
- logo: {
- "@type": "ImageObject",
- url: `${siteUrl}/favicon/favicon-96x96.png`
- }
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Patrick’s Data Lab",
+  url: siteUrl,
+  logo: {
+    "@type": "ImageObject",
+    // CORRECTED PATH TO YOUR PNG FAVICON
+    url: `https://mp.ls/patrick/favico.png` 
+  }
 };
 ---
 
@@ -119,7 +111,7 @@ const orgSchema = {
 
 {/* Add keywords meta tag to help with keyword distribution score, though Google mostly ignores it */}
 {tags.length > 0 && (
-  <meta name="keywords" content={tags.join(", ")} />
+  <meta name="keywords" content={tags.join(", ")} />
 )}
 
 <!-- ============================================= -->
@@ -152,7 +144,6 @@ const orgSchema = {
 
 <!-- ============================================= -->
 <!-- BLUESKY META -->
-<!-- Note: Bluesky relies heavily on Open Graph, but these tags can ensure compatibility -->
 <!-- ============================================= -->
 <meta property="bsky:title" content={title} />
 <meta property="bsky:description" content={description} />
@@ -181,7 +172,7 @@ const orgSchema = {
     name: "Patrick’s Data Lab",
     logo: {
       "@type": "ImageObject",
-      url: `${siteUrl}/favicon/favicon-96x96.png`
+      url: `${siteUrl}/patrick/favicon.png` // Corrected to PNG
     }
   }
 })} />

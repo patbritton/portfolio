@@ -65,7 +65,7 @@ src/
 ├── pages/             # File-based Routing
 │   ├── api/           # Dynamic Server Endpoints (OG Images, Email)
 │   ├── blog/          # Dynamic Blog Routes ([...slug].astro)
-│   └── projects/      # Dashboard Pages
+│   └── dashboards/      # Dashboard Pages
 └── styles/            # Modular CSS Files (global, cards, search, etc.)
 ```
 

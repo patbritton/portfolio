@@ -50,7 +50,7 @@ const SiteSearch = ({ posts }) => {
               <input
                 ref={inputRef}
                 type="text"
-                placeholder="Search posts, tags, projects..."
+                placeholder="Search posts, tags, dashboards..."
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 className="search-input"
