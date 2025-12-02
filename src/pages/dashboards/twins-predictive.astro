@@ -1,0 +1,14 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import TwinsScenarioDashboard from '../../components/TwinsScenarioDashboard.jsx';
+export const prerender = true;
+import '../../styles/TwinsScenarioDashboard.css';
+---
+
+<MainLayout title="Twins Scenario Analytics">
+  <div style="margin-bottom: 20px;">
+    <a href="/dashboards" style="color: #666; text-decoration: none;">← Back to dashboards</a>
+  </div>
+
+  <TwinsScenarioDashboard client:load />
+</MainLayout>

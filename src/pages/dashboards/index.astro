@@ -4,10 +4,9 @@ import { dashboards } from '../../data/dashboards.js';
 export const prerender = true;
 import '../../styles/dashboards.css';
 
-// FIX: Importing icons explicitly using the pkg workaround
+// FIX: Lucide import pattern for CJS
 import pkg from 'lucide-react';
-const { CircleDot, TrendingUp } = pkg;
-// The CircleDot icon is imported here to be used in the template's dynamic call.
+const { CircleDot, TrendingUp, Activity } = pkg;
 ---
 
 <MainLayout title="Dashboards">
@@ -20,21 +19,26 @@ const { CircleDot, TrendingUp } = pkg;
   <div class="dashboard-grid">
     {dashboards.map(project => (
       <a href={project.link} class="dash-card">
-        
-        <div class="preview-area" style={`background: radial-gradient(circle at center, ${project.color}1a 0%, #0f172a 70%);`}>
+
+        <div 
+          class="preview-area" 
+          style={`background: radial-gradient(circle at center, ${project.color}1a 0%, #0f172a 70%);`}
+        >
           {project.image ? (
-            // Renders the custom image defined in dashboards.js
             <img src={project.image} alt={project.title} class="preview-img" />
           ) : (
-            // Renders the Lucide icon fallback (e.g., for 'Sales Forecasting')
-            <project.icon size={64} color={project.color} className="placeholder-icon" />
+            <project.icon
+              size={64}
+              color={project.color}
+              className="placeholder-icon"
+            />
           )}
         </div>
 
         <div class="card-content">
           <h3>{project.title}</h3>
           <p>{project.description}</p>
-          
+
           <div class="tech-stack">
             {project.tags.map(tag => (
               <span class="tech-tag">{tag}</span>
