@@ -2,9 +2,11 @@
 import MainLayout from './MainLayout.astro';
 import { getCollection } from 'astro:content';
 import SearchWidget from '../components/SearchWidget.jsx';
-import '../styles/blog-layout.css'; 
-
+import '../styles/blog-layout.css';
 const { frontmatter } = Astro.props;
+
+// Helper function duplicated here to ensure the URL slug is correctly generated
+const simpleSlugify = (text) => text.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
 
 // Fetch posts for sidebar navigation
 const allPosts = await getCollection('blog');
@@ -15,7 +17,6 @@ const dateStr = date.toLocaleDateString('en-US', {
   year: 'numeric', month: 'long', day: 'numeric'
 });
 const pubTime = date.toISOString();
-
 // Check for and format the update date
 let modDateStr;
 let modTime;
@@ -34,7 +35,6 @@ const description = frontmatter.description;
 const canonicalPath = `/blog/${frontmatter.slug}/`;
 const ogType = "article";
 const tags = frontmatter.tags || [];
-
 // Use updatedDate as modifiedTime for SEO if it exists, otherwise use pubDate
 const finalModifiedTime = modTime || pubTime;
 ---
@@ -57,6 +57,7 @@ const finalModifiedTime = modTime || pubTime;
           Published: {dateStr}
           {modDateStr && (
             // Display "Updated" label only if updatedDate exists
+          
             <span style={{marginLeft: '1rem', color: '#64748b'}}>Updated: {modDateStr}</span>
           )}
         </span>
@@ -64,9 +65,10 @@ const finalModifiedTime = modTime || pubTime;
         
         <div class="tags">
           {frontmatter.tags && frontmatter.tags.map(tag => (
-            <a href={`/tags/${tag}`} class="tag">#{tag}</a>
+            <a href={`/tags/${simpleSlugify(tag)}`} class="tag">#{tag}</a>
           ))}
         </div>
+    
       </header>
 
       <hr class="divider" />
@@ -82,10 +84,12 @@ const finalModifiedTime = modTime || pubTime;
         <h3>Recent Updates</h3>
         <ul class="post-list">
           {sortedPosts.map(post => (
+           
             <li>
               <a 
-                href={`/blog/${post.slug}`} 
-                class={frontmatter.title === post.data.title ? 'active' : ''}
+                href={`/blog/${post.id.replace('.md', '').toLowerCase()}`} 
+                class={frontmatter.title === post.data.title ?
+'active' : ''}
               >
                 {post.data.title}
                 <span class="date-small">{post.data.pubDate.toISOString().slice(0,10)}</span>
@@ -94,6 +98,7 @@ const finalModifiedTime = modTime || pubTime;
           ))}
         </ul>
       </div>
+ 
     </aside>
 
   </div>

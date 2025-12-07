@@ -17,7 +17,7 @@ export const dashboards = [
 
   {
     id: 'twins-predictive',
-    title: "Sabermetric Modeling Lab",
+    title: "Twins Season Architect",
     description:
       "Predict future seasons using Pythagorean Expectation. Model outcomes by adjusting Team wRC+ and FIP.",
     link: "/dashboards/twins-predictive",

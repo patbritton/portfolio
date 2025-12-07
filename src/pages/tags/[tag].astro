@@ -1,38 +1,70 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
 import { getCollection } from 'astro:content';
-import '../../styles/cards.css'; // Re-use your existing card styles
+import '../../styles/cards.css';
+
+// Add prerender to generate static pages at build time
+export const prerender = true;
 
 export async function getStaticPaths() {
-  const allPosts = await getCollection('blog');
+  // Helper function to create a consistent slug: lowercase and hyphenate spaces/non-word characters
+  const simpleSlugify = (text) => text.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
   
-  // 1. Get all unique tags
-  const uniqueTags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
+  const allPosts = await getCollection('blog');
 
-  // 2. Generate a page for each tag
-  return uniqueTags.map((tag) => {
-    const filteredPosts = allPosts.filter((post) => post.data.tags.includes(tag));
+  // Map to hold unique { slug: rawTag } pairs, using the slug as the key
+  const tagMap = new Map();
+
+  for (const post of allPosts) {
+    if (post.data.tags) {
+      for (const rawTag of post.data.tags) {
+        const tagSlug = simpleSlugify(rawTag);
+        
+        // Use the first occurrence of the raw tag as the canonical display name 
+        // for that slug, ensuring consistent casing in the header.
+        if (!tagMap.has(tagSlug)) {
+          tagMap.set(tagSlug, rawTag);
+        }
+      }
+    }
+  }
+
+  // Generate a page for each unique tag slug
+  return [...tagMap.entries()].map(([tagSlug, rawTag]) => {
+    
+    // Filter: find posts where ANY of the post's tags, when slugified, 
+    // match the current tagSlug. This is the fix for broken filtering.
+    const filteredPosts = allPosts.filter((post) => {
+      // Safely map post tags to their slugs and check if the current tagSlug is included
+      const postTagSlugs = (post.data.tags || []).map(t => simpleSlugify(t));
+      return postTagSlugs.includes(tagSlug);
+    });
+
     return {
-      params: { tag },
-      props: { posts: filteredPosts },
+      params: { tag: tagSlug }, // The URL segment
+      props: { 
+        posts: filteredPosts, 
+        displayName: rawTag // The original string for display
+      },
     };
   });
 }
 
 const { tag } = Astro.params;
-const { posts } = Astro.props;
+// Get the original raw tag name as 'displayName' and default posts to an empty array
+const { posts = [], displayName = tag } = Astro.props;
 ---
 
-<MainLayout title={`#${tag}`}>
+<MainLayout title={`#${displayName}`}>
   <div class="tag-header">
-    <h1>#{tag}</h1>
-    <p>Showing {posts.length} post{posts.length !== 1 ? 's' : ''} tagged with <strong>{tag}</strong></p>
+    <h1>#{displayName}</h1>
+    <p>Showing {posts.length} post{posts.length !== 1 ? 's' : ''} tagged with <strong>{displayName}</strong></p>
     <a href="/blog" class="back-link">← Back to All Posts</a>
   </div>
 
   <div class="blog-grid">
     {posts.map((post) => (
-      <a href={`/blog/${post.slug}`} class="blog-card">
+      <a href={`/blog/${post.id.replace('.md', '').toLowerCase()}`} class="blog-card">
         <span class="post-date">{post.data.pubDate.toISOString().slice(0,10)}</span>
         <h3>{post.data.title}</h3>
         <p>{post.data.description}</p>
@@ -43,9 +75,12 @@ const { posts } = Astro.props;
 </MainLayout>
 
 <style>
-  .tag-header { text-align: center; margin-bottom: 3rem; }
+  .tag-header { text-align: center;
+margin-bottom: 3rem; }
   h1 { font-size: 3rem; color: #f8fafc; margin-bottom: 0.5rem; text-transform: capitalize; }
-  p { color: #94a3b8; font-size: 1.2rem; }
+  p { color: #94a3b8;
+font-size: 1.2rem; }
   .back-link { display: inline-block; margin-top: 1rem; color: #2dd4bf; text-decoration: none; }
-  .back-link:hover { text-decoration: underline; }
+  .back-link:hover { text-decoration: underline;
+}
 </style>
