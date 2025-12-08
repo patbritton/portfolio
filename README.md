@@ -108,15 +108,3 @@ npm run dev
 ```
 
 Visit `http://localhost:4321` to see the app.
-
-***
-
-## 🔄 Deployment Pipeline
-This project uses a CI/CD pipeline defined in `.github/workflows/deploy.yml` that handles the server-side build and process management.
-
-The deployment process is:
-1.  Code is pushed to `main`.
-2.  GitHub Actions logs into the VPS via SSH.
-3.  It runs `git reset --hard origin/main` and `npm install`.
-4.  It runs `npm run build` to generate the static assets and the Node.js server bundle (`dist/server/entry.mjs`).
-5.  It runs the **critical step** `pm2 restart portfolio` to load the new server bundle.
