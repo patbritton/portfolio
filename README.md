@@ -107,4 +107,4 @@ Run the Dev Server:
 npm run dev
 ```
 
-Visit `http://localhost:4321` to see the app.
+Visit `http://localhost:4321` to see the app!
